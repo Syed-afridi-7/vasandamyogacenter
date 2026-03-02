@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Download } from "lucide-react";
-import logoSvg from "@/assets/logocore.jpeg";
+import logoSvg from "@/assets/logo.png";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -23,8 +23,8 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-white/90 dark:bg-[#0a0d1a]/90 backdrop-blur-xl shadow-lg shadow-black/5 border-b border-border"
-          : "bg-transparent"
+        ? "bg-white/90 dark:bg-[#0a0d1a]/90 backdrop-blur-xl shadow-lg shadow-black/5 border-b border-border"
+        : "bg-transparent"
         }`}
     >
       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-6">
@@ -33,10 +33,10 @@ const Navbar = () => {
           <img
             src={logoSvg}
             alt="NWR India Logo"
-            className="h-10 w-10 object-contain rounded-sm transition-transform duration-300 group-hover:scale-105"
+            className="h-14 w-auto object-contain rounded-sm transition-transform duration-300 group-hover:scale-105"
           />
-          <span className="font-display font-bold text-lg text-foreground tracking-tight hidden sm:block">
-            NWR <span className="text-gradient-primary">India</span>
+          <span className="font-bold text-lg tracking-tight hidden sm:block text-foreground">
+            NWR <span className="text-violet-500 font-extrabold">India</span>
           </span>
         </a>
 
