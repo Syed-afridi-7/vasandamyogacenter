@@ -5,7 +5,7 @@ import { User, Phone, Mail, MapPin, CheckCircle2 } from "lucide-react";
 const RegistrationSection = () => {
     const [submitted, setSubmitted] = useState(false);
     const [form, setForm] = useState({
-        name: "", age: "", gender: "", phone: "", email: "", city: "", experience: "",
+        name: "", age: "", gender: "", phone: "", email: "", city: "", experience: "", event_type: "",
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -30,10 +30,10 @@ const RegistrationSection = () => {
                 >
                     <span className="section-label mb-4 inline-flex">Register</span>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-4">
-                        Yoga Marathon Registration
+                        Salem Yoga Festival 2026 Registration
                     </h2>
                     <p className="text-muted-foreground max-w-md mx-auto text-base">
-                        Register now for our next Yoga Marathon — One Hour Non Stop Yoga Practice.
+                        Register now for the World Record Event or the National Yoga Competition.
                     </p>
                 </motion.div>
 
@@ -135,18 +135,28 @@ const RegistrationSection = () => {
                             </div>
 
                             {/* Experience */}
-                            <div className="space-y-1.5">
-                                <label className="text-sm font-semibold text-foreground">Yoga Experience Level</label>
-                                <select name="experience" value={form.experience} onChange={handleChange} required className="input-modern">
-                                    <option value="">Select level</option>
-                                    <option value="beginner">Beginner (0–1 year)</option>
-                                    <option value="intermediate">Intermediate (1–3 years)</option>
-                                    <option value="advanced">Advanced (3+ years)</option>
-                                </select>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="space-y-1.5">
+                                    <label className="text-sm font-semibold text-foreground">Yoga Experience Level</label>
+                                    <select name="experience" value={form.experience} onChange={handleChange} required className="input-modern">
+                                        <option value="">Select level</option>
+                                        <option value="beginner">Beginner (0–1 year)</option>
+                                        <option value="intermediate">Intermediate (1–3 years)</option>
+                                        <option value="advanced">Advanced (3+ years)</option>
+                                    </select>
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="text-sm font-semibold text-foreground">Event Type</label>
+                                    <select name="event_type" value={form.event_type} onChange={handleChange} required className="input-modern">
+                                        <option value="">Select Event Mode</option>
+                                        <option value="world_record">World Record Event (₹850)</option>
+                                        <option value="national_yoga">National Yoga Competition (₹1200)</option>
+                                    </select>
+                                </div>
                             </div>
 
                             <button type="submit" className="btn-primary-glow w-full text-white font-semibold text-sm py-4">
-                                Submit Registration
+                                Proceed to Payment
                             </button>
                         </motion.form>
                     )}

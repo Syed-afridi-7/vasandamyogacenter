@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Users, ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles, Instagram, Facebook, Youtube } from "lucide-react";
 
 const CommunitySection = () => {
   return (
@@ -35,25 +35,32 @@ const CommunitySection = () => {
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Join Our NWR Community
+              Join Our WhatsApp Community
             </h2>
             <p className="max-w-xl mx-auto text-white/70 text-base mb-8 leading-relaxed">
               Connect with a passionate community dedicated to wellness and excellence.
               Share your journey, learn from others, and help build the next era of Yoga sport.
             </p>
 
-            <div className="flex items-center justify-center gap-2 mb-10">
-              <Users className="w-5 h-5 text-violet-300" />
-              <span className="font-bold text-xl text-white">128K followers</span>
+            <div className="flex items-center justify-center gap-4 mb-10">
+              <a href="#" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
+                <Instagram className="w-5 h-5 text-white" />
+              </a>
+              <a href="#" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
+                <Facebook className="w-5 h-5 text-white" />
+              </a>
+              <a href="#" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
+                <Youtube className="w-5 h-5 text-white" />
+              </a>
             </div>
 
             <a
-              href="https://www.facebook.com/nobleworldrecords"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-white text-purple-700 px-8 py-4 text-sm font-bold hover:bg-white/90 transition-all duration-200 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-xl bg-green-500 text-white px-8 py-4 text-sm font-bold hover:bg-green-600 transition-all duration-200 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-0.5"
             >
-              Join Now
+              Join via WhatsApp
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>

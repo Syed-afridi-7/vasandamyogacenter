@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { Heart, Star } from "lucide-react";
 
 const testimonials = [
-  { name: "Mohan", text: "The Noble World Records events have transformed how I view competitive martial arts and yoga. The discipline and community spirit is unmatched." },
-  { name: "Priya", text: "Being part of NWR gave me the confidence to pursue martial arts and yoga professionally. A life-changing experience." },
-  { name: "Rajesh", text: "NWR's commitment to youth empowerment through world records is truly inspiring. It's more than just an event." },
-  { name: "Anita", text: "The level of organization and passion behind NWR is remarkable. It truly promotes martial arts and yoga as competitive sports." },
-  { name: "Vikram", text: "Participating in the Noble World Records events was the highlight of my career. An incredible platform for athletes." },
+  { name: "[Student Name]", text: "[Review Text Placeholder - The Noble World Records events have transformed how I view competitive martial arts and yoga. The discipline and community spirit is unmatched.]" },
+  { name: "[Student Name]", text: "[Review Text Placeholder - Being part of NWR gave me the confidence to pursue martial arts and yoga professionally. A life-changing experience.]" },
+  { name: "[Student Name]", text: "[Review Text Placeholder - NWR's commitment to youth empowerment through world records is truly inspiring. It's more than just an event.]" },
+  { name: "[Student Name]", text: "[Review Text Placeholder - The level of organization and passion behind NWR is remarkable. It truly promotes martial arts and yoga as competitive sports.]" },
+  { name: "[Student Name]", text: "[Review Text Placeholder - Participating in the Noble World Records events was the highlight of my career. An incredible platform for athletes.]" },
 ];
 
 const TestimonialsSection = () => {
@@ -20,7 +20,7 @@ const TestimonialsSection = () => {
           viewport={{ once: true }}
         >
           <Heart className="inline w-8 h-8 text-primary mr-2" />
-          Love from India's Yoga Community
+          Love from Vasantham Yoga Center Students
         </motion.h2>
       </div>
 

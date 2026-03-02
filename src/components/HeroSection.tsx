@@ -3,7 +3,6 @@ import { ArrowRight, Trophy, Shield, Star } from "lucide-react";
 
 const badges = [
   { icon: Trophy, label: "World Records" },
-  { icon: Shield, label: "Martial Arts" },
   { icon: Star, label: "Yoga Sports" },
 ];
 
@@ -36,37 +35,43 @@ const HeroSection = () => {
             transition={{ duration: 0.5 }}
             className="mb-8"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-violet-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
-              Noble World Records
+            <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/50 bg-amber-400/15 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-white">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              Salem Yoga Festival 2026
             </span>
           </motion.div>
 
-          {/* Heading */}
+          {/* Main Heading */}
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6 tracking-tight"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight drop-shadow-lg"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Promoting World Records
-            <br />
-            in{" "}
-            <span className="text-gradient-primary animate-gradient">
-              Martial Arts & Yoga
-            </span>
+            Salem Yoga Festival 2026
           </motion.h1>
+
+
 
           {/* Sub-heading */}
           <motion.p
-            className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-xl md:text-2xl text-slate-300 font-medium max-w-2xl mx-auto mb-6 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Shaping confident, capable, and empowered youth through world-class
-            events, discipline, and the celebration of extraordinary human potential.
+            Organized by Vasantham Yoga Center
           </motion.p>
+
+          <motion.div
+            className="text-base md:text-lg text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+          >
+            <p className="mb-2"><strong className="text-white">World Record Details:</strong> [Placeholder for New Content]</p>
+            <p><strong className="text-white">Our Mission:</strong> Promoting World Record in Martial Arts and Yoga.</p>
+          </motion.div>
 
           {/* CTAs */}
           <motion.div
@@ -77,16 +82,17 @@ const HeroSection = () => {
           >
             <a
               href="#register"
-              className="btn-primary-glow flex items-center gap-2 text-white text-sm font-semibold px-8 py-4 rounded-xl"
+              className="btn-primary-glow flex flex-col items-center gap-1 text-white text-sm px-6 py-4 rounded-xl text-center"
             >
-              Register Now
-              <ArrowRight className="w-4 h-4" />
+              <span className="font-bold text-base flex items-center gap-2">Register for World Record Event <ArrowRight className="w-4 h-4" /></span>
+              <span className="text-xs font-normal opacity-90">(Fee: ₹850 - Includes Certificate & Medal)</span>
             </a>
             <a
-              href="#events"
-              className="flex items-center gap-2 rounded-xl border border-slate-600 bg-white/5 backdrop-blur-sm px-8 py-4 text-sm font-semibold text-slate-200 hover:bg-white/10 hover:border-slate-400 transition-all duration-300"
+              href="#register"
+              className="flex flex-col items-center gap-1 rounded-xl border border-amber-500/50 bg-amber-500/10 backdrop-blur-sm px-6 py-4 text-sm text-white hover:bg-amber-500/20 hover:border-amber-400 transition-all duration-300 text-center"
             >
-              View Events
+              <span className="font-bold text-base flex items-center gap-2">Register for National Yoga Competition <ArrowRight className="w-4 h-4" /></span>
+              <span className="text-xs font-normal opacity-90">(Fee: ₹1200 - Includes Framed Certificate & Medal)</span>
             </a>
           </motion.div>
 

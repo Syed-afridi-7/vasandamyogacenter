@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 import logoSvg from "@/assets/logo.png";
 
 const navLinks = [
@@ -30,13 +31,16 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between h-16 px-4 md:px-6">
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2.5 group">
-          <img
+          <motion.img
             src={logoSvg}
-            alt="NWR India Logo"
+            alt="Vasantham Yoga Center Logo"
             className="h-14 w-auto object-contain rounded-sm transition-transform duration-300 group-hover:scale-105"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           />
-          <span className="font-bold text-lg tracking-tight hidden sm:block text-foreground">
-            NWR <span className="text-violet-500 font-extrabold">India</span>
+          <span className="font-bold text-lg tracking-tight hidden sm:block text-red-800">
+            Vasantham <span className="text-red-700 font-extrabold">Yoga Center</span>
           </span>
         </a>
 
@@ -56,12 +60,10 @@ const Navbar = () => {
         {/* CTA */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="/CERTIFICATE_Final.pdf"
-            download="CERTIFICATE_Final.pdf"
-            className="flex items-center gap-2 btn-primary-glow text-white text-sm"
+            href="#register"
+            className="flex items-center gap-2 btn-primary-glow text-white text-sm px-5 py-2.5 rounded-lg font-medium"
           >
-            <Download className="w-4 h-4" />
-            Download
+            Register Now
           </a>
         </div>
 
@@ -90,12 +92,11 @@ const Navbar = () => {
           ))}
           <div className="pt-2">
             <a
-              href="/CERTIFICATE_Final.pdf"
-              download="CERTIFICATE_Final.pdf"
-              className="flex items-center justify-center gap-2 btn-primary-glow text-white text-sm w-full"
+              href="#register"
+              className="flex items-center justify-center gap-2 btn-primary-glow text-white text-sm w-full py-2.5 rounded-lg"
+              onClick={() => setMobileOpen(false)}
             >
-              <Download className="w-4 h-4" />
-              Download Certificate
+              Register Now
             </a>
           </div>
         </div>

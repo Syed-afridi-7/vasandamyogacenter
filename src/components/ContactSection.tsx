@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Send, CheckCircle2, Loader2 } from "lucide-react";
+
+// Netlify Function endpoint — works locally (netlify dev) and on production
+const API_ENDPOINT = "/api/contact";
 
 const contactInfo = [
   { icon: Phone, label: "Phone", value: "+91 9351889375", href: "tel:+919351889375" },
@@ -8,6 +12,33 @@ const contactInfo = [
 ];
 
 const ContactSection = () => {
+  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch(API_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setForm({ name: "", phone: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section id="contact" className="py-24 bg-background relative overflow-hidden">
       <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
@@ -66,22 +97,76 @@ const ContactSection = () => {
           >
             <div className="bg-card border border-border rounded-2xl p-8 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-shadow duration-300">
               <h3 className="font-bold text-foreground text-lg mb-6">Send a Message</h3>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <input className="input-modern" placeholder="Your Name" />
-                <input className="input-modern" placeholder="Mobile Number" type="tel" />
-                <input className="input-modern" placeholder="Email Address" type="email" />
-                <textarea
-                  className="input-modern min-h-[120px] resize-none"
-                  placeholder="Your Message"
-                />
-                <button
-                  type="submit"
-                  className="btn-primary-glow w-full flex items-center justify-center gap-2 text-white"
-                >
-                  <Send className="w-4 h-4" />
-                  Send Message
-                </button>
-              </form>
+
+              {status === "success" ? (
+                <div className="flex flex-col items-center gap-4 py-10 text-center">
+                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                    <CheckCircle2 className="w-8 h-8 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-foreground text-lg">Message Sent! 🎉</p>
+                    <p className="text-muted-foreground text-sm mt-1">
+                      We'll reply to your email shortly. Check your inbox for a confirmation.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setStatus("idle")}
+                    className="text-sm text-primary font-semibold underline underline-offset-4"
+                  >
+                    Send another
+                  </button>
+                </div>
+              ) : (
+                <form className="space-y-4" onSubmit={handleSubmit}>
+                  <input
+                    name="name"
+                    value={form.name}
+                    onChange={handleChange}
+                    required
+                    className="input-modern"
+                    placeholder="Your Name"
+                  />
+                  <input
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    className="input-modern"
+                    placeholder="Mobile Number"
+                    type="tel"
+                  />
+                  <input
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                    className="input-modern"
+                    placeholder="Email Address"
+                    type="email"
+                  />
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    required
+                    className="input-modern min-h-[120px] resize-none"
+                    placeholder="Your Message"
+                  />
+                  {status === "error" && (
+                    <p className="text-red-500 text-sm">❌ Failed to send. Please try again.</p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={status === "sending"}
+                    className="btn-primary-glow w-full flex items-center justify-center gap-2 text-white disabled:opacity-70"
+                  >
+                    {status === "sending" ? (
+                      <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>
+                    ) : (
+                      <><Send className="w-4 h-4" /> Send Message</>
+                    )}
+                  </button>
+                </form>
+              )}
             </div>
           </motion.div>
         </div>

@@ -37,7 +37,7 @@ const EventsSection = () => {
         >
           <span className="section-label mb-4 inline-flex">Events</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4">
-            Noble World Records Events
+            Vasantham Yoga Center Events
           </h2>
         </motion.div>
 

@@ -11,7 +11,7 @@ const FooterSection = () => {
               <div className="w-9 h-9 rounded-xl bg-violet-600 flex items-center justify-center">
                 <Trophy className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold text-lg text-white tracking-tight">NWR India</span>
+              <span className="font-bold text-lg text-white tracking-tight">Vasantham Yoga Center</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-5">
               Empowering youth through world records in martial arts and yoga.
@@ -79,7 +79,10 @@ const FooterSection = () => {
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-500">
-          <p>&copy; {new Date().getFullYear()} Noble World Records. All rights reserved.</p>
+          <div className="space-y-1">
+            <p>&copy; {new Date().getFullYear()} Vasantham Yoga Center. All rights reserved.</p>
+            <p>Organized by: [Updated Organizer Name Placeholder]</p>
+          </div>
           <div className="flex gap-6">
             <a href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
             <a href="/terms" className="hover:text-slate-300 transition-colors">Terms of Service</a>
