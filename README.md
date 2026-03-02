@@ -59,3 +59,4 @@ The application will be available at `http://localhost:8080` (or the port specif
 ## 📝 License
 
 This project is proprietary and confidential. © 2026 Your Company Name. All rights reserved.
+# LEETCODE-daily
