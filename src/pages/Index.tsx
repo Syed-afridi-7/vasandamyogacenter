@@ -10,6 +10,8 @@ import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import BlogsSection from "@/components/BlogsSection";
 import FooterSection from "@/components/FooterSection";
+import SalemYogasanaSection from "@/components/SalemYogasanaSection";
+import ShadowPhoenixSection from "@/components/ShadowPhoenixSection";
 
 const Index = () => {
   return (
@@ -19,9 +21,11 @@ const Index = () => {
       <RegistrationSection />
 
       <AboutSection />
+      <SalemYogasanaSection />
       <TestimonialsSection />
       <CommunitySection />
       <EventsSection />
+      <ShadowPhoenixSection />
       <GallerySection />
       <ContactSection />
       <BlogsSection />
