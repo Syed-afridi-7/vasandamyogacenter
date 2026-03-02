@@ -1,71 +1,90 @@
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { CheckCircle2, ArrowRight } from "lucide-react";
 import aboutYoga from "@/assets/about-yoga.png";
 
 const checkItems = [
   "Promotion of Yoga as a Competitive Sport",
   "Development of a Clear & Effective Yoga Sports Policy",
-  "Youth Transformation through Yogasana & HRD",
+  "Youth Transformation through Noble World Records & HRD",
   "Opportunities for Emerging Yoga Athletes",
 ];
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 section-pink">
-      <div className="container mx-auto px-4">
+    <section id="about" className="py-24 bg-background relative overflow-hidden">
+      {/* Decorative gradient blob */}
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+
+      <div className="container mx-auto px-4 md:px-6">
+        {/* Section label */}
         <motion.div
-          className="text-center mb-12"
+          className="mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Our Achievements</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <span className="section-label mb-4 inline-flex">Our Achievements</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-4">
+            Noble World Records
+          </h2>
+          <p className="text-muted-foreground max-w-xl mx-auto text-base">
             Yoga is an essential part of human development, helping channel youth energy toward meaningful growth.
           </p>
         </motion.div>
 
-        <div className="h-px bg-border mb-12" />
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Text side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <h3 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-6">
-              Jaipur Premier League
-            </h3>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
-              JPL is dedicated to promoting Yoga as a competitive sport in India and across the globe,
-              increasing awareness of its benefits and spiritual roots. With a clear vision for a strong Yoga Sports Policy,
-              JPL aims to empower youth through Yogasana—building confidence, discipline, and capability.
+            <p className="text-muted-foreground text-base leading-relaxed mb-8">
+              NWR is dedicated to promoting yoga and martial arts worldwide,
+              increasing awareness of its benefits and spiritual roots. With a clear vision
+              for a strong Yoga Sports Policy, NWR aims to empower youth through showcasing
+              achievements—building confidence, discipline, and capability.
             </p>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 mb-10">
               {checkItems.map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                  <span className="text-foreground font-medium">{item}</span>
-                </div>
+                <motion.div
+                  key={i}
+                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-muted/50 transition-colors group"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+                  <span className="text-foreground font-medium text-sm">{item}</span>
+                </motion.div>
               ))}
             </div>
 
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              Read More
-            </Button>
+            <a
+              href="#events"
+              className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all duration-200 group"
+            >
+              Explore Our Events
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
           </motion.div>
 
+          {/* Image side */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative"
           >
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/20 to-violet-500/10 blur-2xl" />
             <img
               src={aboutYoga}
-              alt="Yoga practitioners in a studio"
-              className="rounded-2xl shadow-xl w-full"
+              alt="Yoga practitioners"
+              className="relative rounded-2xl shadow-2xl w-full object-cover"
             />
           </motion.div>
         </div>

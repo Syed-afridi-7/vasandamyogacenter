@@ -4,25 +4,25 @@ import blogImg from "@/assets/blog-img.png";
 
 const blogs = [
   {
-    title: "Watch top Yogasana athletes compete for glory on national television.",
+    title: "Watch top martial arts and yoga athletes compete for glory on national television.",
     date: "April 25, 2025",
     readTime: "6 min read",
     excerpt: "Discover how competitive yoga is transforming lives and creating new opportunities for athletes across India.",
   },
   {
-    title: "The Rise of Yogasana as a Competitive Sport in India",
+    title: "The Rise of Martial Arts and Yoga as  Competitive Sports in India",
     date: "April 20, 2025",
     readTime: "5 min read",
-    excerpt: "Explore the growing movement of Yogasana sport and how India is leading the global charge.",
+    excerpt: "Explore the growing movement of martial arts and yoga sports and how India is leading the global charge.",
   },
   {
-    title: "How JPL Empowers Youth Through Yoga Discipline",
+    title: "How NWR Empowers Youth Through Discipline",
     date: "April 15, 2025",
     readTime: "4 min read",
-    excerpt: "Learn how the Jaipur Premier League builds confidence and capability in young practitioners.",
+    excerpt: "Learn how the Noble World Records builds confidence and capability in young practitioners.",
   },
   {
-    title: "Behind the Scenes of the Yogasana Premier League",
+    title: "Behind the Scenes of the Noble World Records Events",
     date: "April 10, 2025",
     readTime: "7 min read",
     excerpt: "An inside look at what makes the YPL one of India's most exciting sporting events.",

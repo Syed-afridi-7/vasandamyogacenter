@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import overviewImg from "@/assets/overview-img.png";
 
 const steps = [
-  { num: 1, title: "Global Yogasana Reality Show", desc: "A nationwide DTH-telecast competition featuring top Yogasana talent." },
+  { num: 1, title: "Global Noble World Records Reality Show", desc: "A nationwide DTH-telecast competition featuring top martial arts and yoga talent." },
   { num: 2, title: "Multi-Level Auditions", desc: "Qualified candidates progress to semi-auditions and mega auditions." },
-  { num: 3, title: "Top Performers Advance", desc: "Official live coverage of the Yogasana Premier League across TV and online streaming platforms." },
-  { num: 4, title: "Live YPL Broadcast", desc: "A nationwide DTH-telecast competition featuring top Yogasana talent." },
+  { num: 3, title: "Top Performers Advance", desc: "Official live coverage of the Noble World Records events across TV and online streaming platforms." },
+  { num: 4, title: "Live NWR Broadcast", desc: "A nationwide DTH-telecast competition featuring top world record talent." },
 ];
 
 const OverviewSection = () => {
@@ -19,7 +19,7 @@ const OverviewSection = () => {
           viewport={{ once: true }}
         >
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Jaipur Yoga League Overview
+            Noble World Records Overview
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             A comprehensive journey from auditions to national broadcast.

@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 import { Heart, Star } from "lucide-react";
 
 const testimonials = [
-  { name: "Mohan", text: "The Jaipur Yoga League has transformed how I view competitive yoga. The discipline and community spirit is unmatched." },
-  { name: "Priya", text: "Being part of JPL gave me the confidence to pursue Yogasana professionally. A life-changing experience." },
-  { name: "Rajesh", text: "JPL's commitment to youth empowerment through yoga is truly inspiring. It's more than just a competition." },
-  { name: "Anita", text: "The level of organization and passion behind JYL is remarkable. It truly promotes yoga as a competitive sport." },
-  { name: "Vikram", text: "Participating in the Yogasana Premier League was the highlight of my career. An incredible platform for athletes." },
+  { name: "Mohan", text: "The Noble World Records events have transformed how I view competitive martial arts and yoga. The discipline and community spirit is unmatched." },
+  { name: "Priya", text: "Being part of NWR gave me the confidence to pursue martial arts and yoga professionally. A life-changing experience." },
+  { name: "Rajesh", text: "NWR's commitment to youth empowerment through world records is truly inspiring. It's more than just an event." },
+  { name: "Anita", text: "The level of organization and passion behind NWR is remarkable. It truly promotes martial arts and yoga as competitive sports." },
+  { name: "Vikram", text: "Participating in the Noble World Records events was the highlight of my career. An incredible platform for athletes." },
 ];
 
 const TestimonialsSection = () => {
