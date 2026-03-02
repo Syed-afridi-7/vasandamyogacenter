@@ -1,19 +1,24 @@
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
-import eventImg from "@/assets/event-img.png";
+import yoga3 from "@/assets/yoga3.jpg";
+import yoga4 from "@/assets/yoga4.jpg";
+import yoga5 from "@/assets/yoga5.jpg";
 
 const events = [
   {
+    img: yoga5,
     title: "Tamizharum Silambamum - Shadow Phoenix Martial Arts",
     date: "01 Mar 2026",
     tag: "Martial Arts",
   },
   {
+    img: yoga4,
     title: "Salem Yoga Marathon 2023 — One Hour Non Stop Yoga Practice",
     date: "2023",
-    tag: "Yoga",
+    tag: "Yoga Marathon",
   },
   {
+    img: yoga3,
     title: "Yoga Marathon 2022 — International Yoga Day",
     date: "19 Jun 2022",
     tag: "Yoga",
@@ -24,7 +29,6 @@ const EventsSection = () => {
   return (
     <section id="events" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4 md:px-6">
-        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -37,7 +41,6 @@ const EventsSection = () => {
           </h2>
         </motion.div>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {events.map((event, i) => (
             <motion.article
@@ -48,10 +51,9 @@ const EventsSection = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              {/* Image */}
               <div className="relative overflow-hidden aspect-[16/9]">
                 <img
-                  src={eventImg}
+                  src={event.img}
                   alt={event.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -60,8 +62,6 @@ const EventsSection = () => {
                   {event.tag}
                 </span>
               </div>
-
-              {/* Content */}
               <div className="p-5">
                 <h3 className="font-bold text-foreground text-sm leading-snug mb-3 line-clamp-2">
                   {event.title}

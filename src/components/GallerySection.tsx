@@ -1,10 +1,23 @@
 import { motion } from "framer-motion";
-import gallery1 from "@/assets/gallery1.png";
-import gallery2 from "@/assets/gallery2.png";
-import eventImg from "@/assets/event-img.png";
-import aboutYoga from "@/assets/about-yoga.png";
+import yoga1 from "@/assets/yoga1.jpg";
+import yoga2 from "@/assets/yoga2.jpg";
+import yoga3 from "@/assets/yoga3.jpg";
+import yoga4 from "@/assets/yoga4.jpg";
+import yoga5 from "@/assets/yoga5.jpg";
+import yoga6 from "@/assets/yoga6.jpg";
+import yoga7 from "@/assets/yoga7.jpg";
+import yoga8 from "@/assets/yoga8.jpg";
 
-const images = [gallery1, gallery2, eventImg, aboutYoga, gallery1, gallery2, eventImg, aboutYoga];
+const images = [
+  { src: yoga1, alt: "Yoga Marathon Pose" },
+  { src: yoga2, alt: "Group Yoga Session" },
+  { src: yoga3, alt: "Yoga Championship" },
+  { src: yoga4, alt: "Yoga Marathon Practice" },
+  { src: yoga5, alt: "Martial Arts Performance" },
+  { src: yoga6, alt: "Yoga Meditation" },
+  { src: yoga7, alt: "Salem Yoga Marathon" },
+  { src: yoga8, alt: "NWR Yoga Event" },
+];
 
 const GallerySection = () => {
   return (
@@ -26,7 +39,7 @@ const GallerySection = () => {
           {images.map((img, i) => (
             <motion.div
               key={i}
-              className={`group relative rounded-2xl overflow-hidden ${i === 0 || i === 5 ? "md:col-span-2 md:row-span-2 aspect-square" : "aspect-square"
+              className={`group relative rounded-2xl overflow-hidden ${i === 0 ? "md:col-span-2 md:row-span-2 aspect-square" : "aspect-square"
                 }`}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -34,11 +47,13 @@ const GallerySection = () => {
               transition={{ delay: i * 0.06 }}
             >
               <img
-                src={img}
-                alt={`Gallery image ${i + 1}`}
+                src={img.src}
+                alt={img.alt}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                <span className="text-white text-xs font-medium">{img.alt}</span>
+              </div>
             </motion.div>
           ))}
         </div>

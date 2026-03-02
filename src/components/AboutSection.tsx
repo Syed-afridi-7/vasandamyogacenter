@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
-import aboutYoga from "@/assets/about-yoga.png";
+import yoga2 from "@/assets/yoga2.jpg";
 
 const checkItems = [
   "Promotion of Yoga as a Competitive Sport",
@@ -12,11 +12,9 @@ const checkItems = [
 const AboutSection = () => {
   return (
     <section id="about" className="py-24 bg-background relative overflow-hidden">
-      {/* Decorative gradient blob */}
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-6">
-        {/* Section label */}
         <motion.div
           className="mb-16 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -33,7 +31,6 @@ const AboutSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Text side */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -46,7 +43,6 @@ const AboutSection = () => {
               for a strong Yoga Sports Policy, NWR aims to empower youth through showcasing
               achievements—building confidence, discipline, and capability.
             </p>
-
             <div className="space-y-3 mb-10">
               {checkItems.map((item, i) => (
                 <motion.div
@@ -62,7 +58,6 @@ const AboutSection = () => {
                 </motion.div>
               ))}
             </div>
-
             <a
               href="#events"
               className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all duration-200 group"
@@ -72,7 +67,6 @@ const AboutSection = () => {
             </a>
           </motion.div>
 
-          {/* Image side */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -82,9 +76,9 @@ const AboutSection = () => {
           >
             <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-primary/20 to-violet-500/10 blur-2xl" />
             <img
-              src={aboutYoga}
-              alt="Yoga practitioners"
-              className="relative rounded-2xl shadow-2xl w-full object-cover"
+              src={yoga2}
+              alt="Yoga practice session"
+              className="relative rounded-2xl shadow-2xl w-full object-cover aspect-[4/3]"
             />
           </motion.div>
         </div>
