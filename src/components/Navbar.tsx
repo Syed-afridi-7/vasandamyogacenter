@@ -39,16 +39,8 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           />
-          <span
-            className="font-bold text-lg tracking-tight block"
-            style={{
-              background: "linear-gradient(90deg, #ffffff 0%, #ef4444 50%, #22c55e 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Vasantham <span style={{ fontWeight: 900 }}>Yoga Center</span>
+          <span className="font-bold text-lg tracking-tight block text-white">
+            Vasantham <span className="text-white font-extrabold">Yoga Center</span>
           </span>
         </a>
 
