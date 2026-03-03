@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { User, Phone, Mail, MapPin, CheckCircle2 } from "lucide-react";
+import { User, Phone, Mail, MapPin, CheckCircle2, Loader2 } from "lucide-react";
 
 const RegistrationSection = () => {
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const [form, setForm] = useState({
         name: "", age: "", gender: "", phone: "", email: "", city: "", experience: "", event_type: "",
     });
@@ -12,9 +14,27 @@ const RegistrationSection = () => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
+        setLoading(true);
+        setError("");
+        try {
+            const res = await fetch("http://localhost:5000/api/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form),
+            });
+            const data = await res.json();
+            if (data.success) {
+                setSubmitted(true);
+            } else {
+                setError(data.message || "Something went wrong. Please try again.");
+            }
+        } catch {
+            setError("Unable to connect to server. Please try again later.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -150,13 +170,17 @@ const RegistrationSection = () => {
                                     <select name="event_type" value={form.event_type} onChange={handleChange} required className="input-modern">
                                         <option value="">Select Event Mode</option>
                                         <option value="world_record">World Record Event (₹850)</option>
-                                        <option value="national_yoga">National Yoga Competition (₹1200)</option>
+                                        <option value="national_yoga">National Yoga Competition (₹1250)</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <button type="submit" className="btn-primary-glow w-full text-white font-semibold text-sm py-4">
-                                Proceed to Payment
+                            {error && (
+                                <p className="text-red-500 text-sm text-center bg-red-50 border border-red-200 rounded-lg px-4 py-2">{error}</p>
+                            )}
+
+                            <button type="submit" disabled={loading} className="btn-primary-glow w-full text-white font-semibold text-sm py-4 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                                {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</> : "Proceed to Payment"}
                             </button>
                         </motion.form>
                     )}
