@@ -39,7 +39,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           />
-          <span className="font-bold text-lg tracking-tight hidden sm:block text-red-800">
+          <span className="font-bold text-lg tracking-tight block text-red-800">
             Vasantham <span className="text-red-700 font-extrabold">Yoga Center</span>
           </span>
         </a>
