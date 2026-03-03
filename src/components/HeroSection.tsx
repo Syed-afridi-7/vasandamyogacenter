@@ -92,7 +92,7 @@ const HeroSection = () => {
               className="flex flex-col items-center gap-1 rounded-xl border border-amber-500/50 bg-amber-500/10 backdrop-blur-sm px-6 py-4 text-sm text-white hover:bg-amber-500/20 hover:border-amber-400 transition-all duration-300 text-center"
             >
               <span className="font-bold text-base flex items-center gap-2">Register for National Yoga Competition <ArrowRight className="w-4 h-4" /></span>
-              <span className="text-xs font-normal opacity-90">(Fee: ₹1200 - Includes Framed Certificate & Medal)</span>
+              <span className="text-xs font-normal opacity-90">(Fee: ₹1250 - Includes Framed Certificate & Medal)</span>
             </a>
           </motion.div>
 
