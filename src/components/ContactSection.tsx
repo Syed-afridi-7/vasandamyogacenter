@@ -7,8 +7,8 @@ const API_ENDPOINT = "/api/contact";
 
 const contactInfo = [
   { icon: Phone, label: "Phone", value: "+91 70920 26756", href: "tel:+917092026756" },
-  { icon: Mail, label: "Email", value: "info@nobleworldrecords.net", href: "mailto:info@nobleworldrecords.net" },
-  { icon: MapPin, label: "Office", value: "Corporate Office, Noble World Records", href: "#" },
+  { icon: Mail, label: "Email", value: "vasanthamyogainfo@gmail.com", href: "mailto:vasanthamyogainfo@gmail.com" },
+  { icon: MapPin, label: "Office", value: "No. 71A/1, Sangari, Sankari Main Rd, Nethimedu, Salem, Tamil Nadu 636002, India", href: "#" },
 ];
 
 const ContactSection = () => {

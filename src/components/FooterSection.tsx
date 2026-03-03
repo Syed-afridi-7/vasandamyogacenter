@@ -63,13 +63,13 @@ const FooterSection = () => {
             <ul className="space-y-2.5 text-slate-400 text-sm">
               <li>+91 70920 26756</li>
               <li>
-                <a href="mailto:info@nobleworldrecords.net" className="hover:text-white transition-colors">
-                  info@nobleworldrecords.net
+                <a href="mailto:vasanthamyogainfo@gmail.com" className="hover:text-white transition-colors">
+                  vasanthamyogainfo@gmail.com
                 </a>
               </li>
               <li>
-                <a href="https://www.nobleworldrecords.net" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  nobleworldrecords.net
+                <a href="mailto:vasanthamyogainfo@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  vasanthamyogainfo@gmail.com
                 </a>
               </li>
             </ul>
