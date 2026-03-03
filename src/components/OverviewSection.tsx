@@ -2,10 +2,26 @@ import { motion } from "framer-motion";
 import overviewImg from "@/assets/overview-img.png";
 
 const steps = [
-  { num: 1, title: "Global Noble World Records Reality Show", desc: "A nationwide DTH-telecast competition featuring top martial arts and yoga talent." },
-  { num: 2, title: "Multi-Level Auditions", desc: "Qualified candidates progress to semi-auditions and mega auditions." },
-  { num: 3, title: "Top Performers Advance", desc: "Official live coverage of the Noble World Records events across TV and online streaming platforms." },
-  { num: 4, title: "Live NWR Broadcast", desc: "A nationwide DTH-telecast competition featuring top world record talent." },
+  {
+    num: 1,
+    title: "World Record Event",
+    desc: "Participate in our flagship World Record Event — a unique platform for advanced yoga performers to showcase their skills.",
+  },
+  {
+    num: 2,
+    title: "National Yoga Competition",
+    desc: "Open to all levels — compete in our national-level yoga competition and win medals, certificates, and prizes.",
+  },
+  {
+    num: 3,
+    title: "Participation Benefits",
+    desc: "Every participant receives a Certificate, Medal, Framed Certificate, and Organization Certificate. Top winners receive special prizes.",
+  },
+  {
+    num: 4,
+    title: "International Yoga Day Celebration",
+    desc: "Results and winner announcements are made on June 21 — International Yoga Day — celebrating yoga's global impact.",
+  },
 ];
 
 const OverviewSection = () => {
@@ -19,10 +35,10 @@ const OverviewSection = () => {
           viewport={{ once: true }}
         >
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Noble World Records Overview
+            Salem Yoga Festival 2026 — Event Overview
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            A comprehensive journey from auditions to national broadcast.
+            Two events, one celebration — promoting yoga awareness and competitive sports development for all.
           </p>
         </motion.div>
 

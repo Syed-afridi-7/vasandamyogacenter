@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Trophy, Shield, Star } from "lucide-react";
+import { ArrowRight, Trophy, Star } from "lucide-react";
 
 const badges = [
-  { icon: Trophy, label: "World Records" },
+  { icon: Trophy, label: "World Record Event" },
   { icon: Star, label: "Yoga Sports" },
 ];
 
@@ -37,7 +37,7 @@ const HeroSection = () => {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/50 bg-amber-400/15 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-white">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-              Salem Yoga Festival 2026
+              World Record Event
             </span>
           </motion.div>
 
@@ -51,11 +51,9 @@ const HeroSection = () => {
             Salem Yoga Festival 2026
           </motion.h1>
 
-
-
           {/* Sub-heading */}
           <motion.p
-            className="text-xl md:text-2xl text-slate-300 font-medium max-w-2xl mx-auto mb-6 leading-relaxed"
+            className="text-xl md:text-2xl text-slate-300 font-medium max-w-2xl mx-auto mb-4 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -63,14 +61,27 @@ const HeroSection = () => {
             Organized by Vasantham Yoga Center
           </motion.p>
 
-          <motion.div
-            className="text-base md:text-lg text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm"
+          {/* Tagline */}
+          <motion.p
+            className="text-base md:text-lg text-violet-300 font-semibold max-w-xl mx-auto mb-8 italic"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
           >
-            <p className="mb-2"><strong className="text-white">World Record Details:</strong> Salem Yogasana Festival 2026 - One Hour Non-Stop Advanced Yogasana Performance</p>
+            Advanced Yoga Performance &amp; Awareness Program
+          </motion.p>
 
+          {/* World Record Details */}
+          <motion.div
+            className="text-base md:text-lg text-slate-400 max-w-3xl mx-auto mb-10 leading-relaxed bg-white/5 border border-white/10 p-6 rounded-2xl backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <p className="mb-0">
+              <strong className="text-white">World Record Event:</strong> Salem Yoga Festival 2026 —
+              Advanced Yoga Performance &amp; Awareness Program
+            </p>
           </motion.div>
 
           {/* CTAs */}
@@ -78,21 +89,19 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
           >
             <a
               href="#register"
-              className="btn-primary-glow flex flex-col items-center gap-1 text-white text-sm px-6 py-4 rounded-xl text-center"
+              className="btn-primary-glow flex items-center gap-2 text-white font-bold text-base px-8 py-4 rounded-xl"
             >
-              <span className="font-bold text-base flex items-center gap-2">Register for World Record Event <ArrowRight className="w-4 h-4" /></span>
-              <span className="text-xs font-normal opacity-90">(Fee: ₹850 - Includes Certificate & Medal)</span>
+              Register for World Record Event <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#register"
-              className="flex flex-col items-center gap-1 rounded-xl border border-amber-500/50 bg-amber-500/10 backdrop-blur-sm px-6 py-4 text-sm text-white hover:bg-amber-500/20 hover:border-amber-400 transition-all duration-300 text-center"
+              className="flex items-center gap-2 rounded-xl border border-amber-500/50 bg-amber-500/10 backdrop-blur-sm px-8 py-4 text-base font-bold text-white hover:bg-amber-500/20 hover:border-amber-400 transition-all duration-300"
             >
-              <span className="font-bold text-base flex items-center gap-2">Register for National Yoga Competition <ArrowRight className="w-4 h-4" /></span>
-              <span className="text-xs font-normal opacity-90">(Fee: ₹1250 - Includes Framed Certificate & Medal)</span>
+              Register for National Yoga Competition <ArrowRight className="w-4 h-4" />
             </a>
           </motion.div>
 

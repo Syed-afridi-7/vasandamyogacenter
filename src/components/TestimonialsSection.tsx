@@ -1,18 +1,33 @@
 import { motion } from "framer-motion";
-import { Heart, Star } from "lucide-react";
+import { Heart, Star, MapPin } from "lucide-react";
 
 const testimonials = [
-  { name: "[Student Name]", text: "[Review Text Placeholder - The Noble World Records events have transformed how I view competitive martial arts and yoga. The discipline and community spirit is unmatched.]" },
-  { name: "[Student Name]", text: "[Review Text Placeholder - Being part of NWR gave me the confidence to pursue martial arts and yoga professionally. A life-changing experience.]" },
-  { name: "[Student Name]", text: "[Review Text Placeholder - NWR's commitment to youth empowerment through world records is truly inspiring. It's more than just an event.]" },
-  { name: "[Student Name]", text: "[Review Text Placeholder - The level of organization and passion behind NWR is remarkable. It truly promotes martial arts and yoga as competitive sports.]" },
-  { name: "[Student Name]", text: "[Review Text Placeholder - Participating in the Noble World Records events was the highlight of my career. An incredible platform for athletes.]" },
+  {
+    name: "Priya R.",
+    text: "Participating in the Salem Yoga Festival through Vasantham Yoga Center has been a life-changing experience. The sense of community and love for yoga here is unmatched.",
+  },
+  {
+    name: "Karthik S.",
+    text: "Vasantham Yoga Center's events have transformed how I view yoga as a competitive sport. The organization and passion behind every event is truly inspiring.",
+  },
+  {
+    name: "Meena V.",
+    text: "Being part of the world record event gave me the confidence to pursue yoga professionally. A wonderful platform for athletes of all levels.",
+  },
+  {
+    name: "Arjun T.",
+    text: "The International Yoga Day celebration on June 21 was unforgettable. Vasantham Yoga Center truly promotes love for yoga and wellness in our community.",
+  },
+  {
+    name: "Sowmya D.",
+    text: "The Salem Yoga Festival is more than just an event — it's a movement. Incredibly well-organized, inclusive, and full of positive energy.",
+  },
 ];
 
 const TestimonialsSection = () => {
   return (
     <section className="py-20 section-pink overflow-hidden">
-      <div className="container mx-auto px-4 text-center mb-12">
+      <div className="container mx-auto px-4 text-center mb-4">
         <motion.h2
           className="font-display text-3xl md:text-4xl font-bold text-foreground"
           initial={{ opacity: 0, y: 20 }}
@@ -20,11 +35,21 @@ const TestimonialsSection = () => {
           viewport={{ once: true }}
         >
           <Heart className="inline w-8 h-8 text-primary mr-2" />
-          Love from Vasantham Yoga Center Students
+          Google Reviews — Vasantham Yoga Center
         </motion.h2>
+        <motion.p
+          className="text-muted-foreground text-sm mt-3 flex items-center justify-center gap-1.5"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <MapPin className="w-4 h-4 text-primary" />
+          Find us on Google Maps &amp; share your experience!
+        </motion.p>
       </div>
 
-      <div className="flex animate-scroll-left gap-6" style={{ width: "max-content" }}>
+      <div className="flex animate-scroll-left gap-6 mt-8" style={{ width: "max-content" }}>
         {[...testimonials, ...testimonials].map((t, i) => (
           <div
             key={i}

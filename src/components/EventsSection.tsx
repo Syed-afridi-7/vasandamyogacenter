@@ -7,13 +7,13 @@ import yoga5 from "@/assets/yoga5.jpg";
 const events = [
   {
     img: yoga5,
-    title: "Tamizharum Silambamum - Shadow Phoenix Martial Arts",
+    title: "Tamizharum Silambamum — Shadow Phoenix Martial Arts",
     date: "01 Mar 2026",
     tag: "Martial Arts",
   },
   {
     img: yoga4,
-    title: "Salem Yoga Marathon 2023 — One Hour Non Stop Yoga Practice",
+    title: "Salem Yoga Marathon 2023 — Advanced Yoga Performance",
     date: "2023",
     tag: "Yoga Marathon",
   },
@@ -35,10 +35,13 @@ const EventsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="section-label mb-4 inline-flex">Events</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4">
-            Vasantham Yoga Center Events
+          <span className="section-label mb-4 inline-flex">Achievements &amp; World Record History</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-3">
+            Our Journey — 2021 to Present
           </h2>
+          <p className="text-muted-foreground max-w-xl mx-auto text-base">
+            From our first yoga marathon in 2021 to world record events today — a celebration of yoga, community, and competitive sports.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

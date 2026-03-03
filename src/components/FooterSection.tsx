@@ -61,7 +61,7 @@ const FooterSection = () => {
           <div>
             <h4 className="font-semibold text-white text-sm mb-5 uppercase tracking-wider">Contact</h4>
             <ul className="space-y-2.5 text-slate-400 text-sm">
-              <li>+91 9351889375</li>
+              <li>+91 70920 26756</li>
               <li>
                 <a href="mailto:info@nobleworldrecords.net" className="hover:text-white transition-colors">
                   info@nobleworldrecords.net

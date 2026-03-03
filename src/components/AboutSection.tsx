@@ -3,10 +3,10 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 import yoga2 from "@/assets/yoga2.jpg";
 
 const checkItems = [
-  "Promotion of Yoga as a Competitive Sport",
-  "Development of a Clear & Effective Yoga Sports Policy",
-  "Youth Transformation through Noble World Records & HRD",
-  "Opportunities for Emerging Yoga Athletes",
+  "Promoting Yoga Awareness since 2021",
+  "Encouraging Competitive Sports Development",
+  "Community Wellness through International Yoga Day",
+  "Empowering Youth through World Records",
 ];
 
 const AboutSection = () => {
@@ -21,12 +21,12 @@ const AboutSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="section-label mb-4 inline-flex">Our Achievements</span>
+          <span className="section-label mb-4 inline-flex">Yoga Awareness</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-4">
-            Noble World Records
+            Promoting Yoga for All
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-base">
-            Yoga is an essential part of human development, helping channel youth energy toward meaningful growth.
+            Yoga is an essential part of human development — channelling energy toward meaningful growth and community wellness.
           </p>
         </motion.div>
 
@@ -38,10 +38,11 @@ const AboutSection = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-muted-foreground text-base leading-relaxed mb-8">
-              NWR is dedicated to promoting yoga and martial arts worldwide,
+              Vasantham Yoga Center is dedicated to promoting yoga and wellness worldwide,
               increasing awareness of its benefits and spiritual roots. With a clear vision
-              for a strong Yoga Sports Policy, NWR aims to empower youth through showcasing
-              achievements—building confidence, discipline, and capability.
+              for competitive sports development, we empower youth through world-record events —
+              building confidence, discipline, and community spirit since 2021.
+              Every June 21, International Yoga Day, we celebrate this shared journey.
             </p>
             <div className="space-y-3 mb-10">
               {checkItems.map((item, i) => (

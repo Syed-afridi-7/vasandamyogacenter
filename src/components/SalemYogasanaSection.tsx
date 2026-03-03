@@ -17,6 +17,14 @@ const guidelines = [
     "Pair Yoga Allowed (Two Participants in One Video)",
 ];
 
+const rewards = [
+    "Participation Certificate",
+    "Medal",
+    "Framed Certificate",
+    "Organization Certificate",
+    "Top Winner Prize",
+];
+
 const SalemYogasanaSection = () => {
     return (
         <section className="py-24 bg-background relative overflow-hidden">
@@ -30,12 +38,12 @@ const SalemYogasanaSection = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                 >
-                    <span className="section-label mb-4 inline-flex">Noble Book of Records</span>
+                    <span className="section-label mb-4 inline-flex">Event 1 Schedule</span>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-3">
                         Salem Yogasana Festival <span className="text-violet-500">2026</span>
                     </h2>
                     <p className="text-lg font-semibold text-primary mt-2">
-                        Advanced Yogasana Performance — Online World Record Event
+                        Advanced Yoga Performance &amp; Awareness Program — Online World Record Event
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
                         Organised by <strong>Vasantham Yoga Center</strong> · In association with Khelo India &amp; Fit India
@@ -52,7 +60,7 @@ const SalemYogasanaSection = () => {
                 >
                     <img
                         src={img1}
-                        alt="Salem Yogasana Festival 2026 - Noble Book of Records"
+                        alt="Salem Yogasana Festival 2026"
                         className="rounded-2xl shadow-2xl w-full max-w-lg object-contain border border-border"
                     />
                 </motion.div>
@@ -68,7 +76,7 @@ const SalemYogasanaSection = () => {
                     >
                         <div className="flex items-center gap-2 mb-5">
                             <Calendar className="w-5 h-5 text-primary" />
-                            <h3 className="font-bold text-foreground text-base">Event Schedule</h3>
+                            <h3 className="font-bold text-foreground text-base">Event 1 Schedule</h3>
                         </div>
                         <div className="space-y-4">
                             {schedule.map((s, i) => (
@@ -81,6 +89,9 @@ const SalemYogasanaSection = () => {
                                 </div>
                             ))}
                         </div>
+                        <p className="mt-4 text-xs text-muted-foreground border-t border-border pt-3">
+                            Participation Certificate and Medal Included.
+                        </p>
                     </motion.div>
 
                     {/* Entry Fee + Rewards */}
@@ -90,7 +101,6 @@ const SalemYogasanaSection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        {/* Two fee boxes side by side */}
                         <div className="grid grid-cols-2 gap-3">
                             <div className="bg-gradient-to-br from-violet-600 to-indigo-700 rounded-2xl p-5 text-white shadow-lg">
                                 <div className="flex items-center gap-1 mb-2">
@@ -105,7 +115,7 @@ const SalemYogasanaSection = () => {
                                     <IndianRupee className="w-4 h-4 text-yellow-200" />
                                     <h3 className="font-bold text-sm">National Yoga</h3>
                                 </div>
-                                <p className="text-3xl font-extrabold">₹1250</p>
+                                <p className="text-3xl font-extrabold">₹1200</p>
                                 <p className="text-xs text-white/70 mt-1">Per Participant</p>
                             </div>
                         </div>
@@ -115,7 +125,7 @@ const SalemYogasanaSection = () => {
                                 <h3 className="font-bold text-foreground text-base">Participants Will Receive</h3>
                             </div>
                             <div className="space-y-2.5">
-                                {["World Record Certificate + Medal", "Organizer Certificate"].map((item, i) => (
+                                {rewards.map((item, i) => (
                                     <div key={i} className="flex items-center gap-2 text-sm text-foreground">
                                         <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
                                         {item}

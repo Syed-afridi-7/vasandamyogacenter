@@ -6,7 +6,7 @@ import { Phone, Mail, MapPin, Send, CheckCircle2, Loader2 } from "lucide-react";
 const API_ENDPOINT = "/api/contact";
 
 const contactInfo = [
-  { icon: Phone, label: "Phone", value: "+91 9351889375", href: "tel:+919351889375" },
+  { icon: Phone, label: "Phone", value: "+91 70920 26756", href: "tel:+917092026756" },
   { icon: Mail, label: "Email", value: "info@nobleworldrecords.net", href: "mailto:info@nobleworldrecords.net" },
   { icon: MapPin, label: "Office", value: "Corporate Office, Noble World Records", href: "#" },
 ];
