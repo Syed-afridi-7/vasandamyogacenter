@@ -8,30 +8,36 @@ app.use(cors());
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS,
-    },
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // STARTTLS
+  family: 4,     // Force IPv4
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
 app.post("/api/register", async (req, res) => {
-    const { name, age, gender, phone, email, city, experience, event_type } = req.body;
+  const { name, age, gender, phone, email, city, experience, event_type } = req.body;
 
-    if (!name || !phone || !email || !event_type) {
-        return res.status(400).json({ success: false, message: "Missing required fields." });
-    }
+  if (!name || !phone || !email || !event_type) {
+    return res.status(400).json({ success: false, message: "Missing required fields." });
+  }
 
-    const eventLabel =
-        event_type === "world_record"
-            ? "World Record Event (₹850)"
-            : "National Yoga Competition (₹1250)";
+  const eventLabel =
+    event_type === "world_record"
+      ? "World Record Event (₹850)"
+      : "National Yoga Competition (₹1250)";
 
-    const mailOptions = {
-        from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
-        to: process.env.ADMIN_EMAIL,
-        subject: `🏅 New Registration: ${name} — ${eventLabel}`,
-        html: `
+  const mailOptions = {
+    from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
+    to: process.env.ADMIN_EMAIL,
+    subject: `🏅 New Registration: ${name} — ${eventLabel}`,
+    html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
         <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 24px; text-align: center;">
           <h1 style="color: white; margin: 0; font-size: 22px;">New Registration Received</h1>
@@ -59,15 +65,15 @@ app.post("/api/register", async (req, res) => {
         </div>
       </div>
     `,
-    };
+  };
 
-    try {
-        await transporter.sendMail(mailOptions);
-        res.json({ success: true, message: "Registration received! Email sent." });
-    } catch (err) {
-        console.error("Email error:", err);
-        res.status(500).json({ success: false, message: "Registration saved but email failed." });
-    }
+  try {
+    await transporter.sendMail(mailOptions);
+    res.json({ success: true, message: "Registration received! Email sent." });
+  } catch (err) {
+    console.error("Email error:", err);
+    res.status(500).json({ success: false, message: "Registration saved but email failed." });
+  }
 });
 
 const PORT = process.env.PORT || 5000;
