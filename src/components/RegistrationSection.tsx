@@ -197,9 +197,7 @@ function RegistrationForm({
                             justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed
                             rounded-xl transition-all ${accentClass}`}
             >
-                {loading
-                    ? <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</>
-                    : `Submit — ${eventLabel}`}
+                {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Submitting...</> : "Submit"}
             </button>
         </motion.form>
     );

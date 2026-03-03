@@ -68,8 +68,8 @@ const FooterSection = () => {
                 </a>
               </li>
               <li>
-                <a href="mailto:vasanthamyogainfo@gmail.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  vasanthamyogainfo@gmail.com
+                <a href="#" className="hover:text-white transition-colors">
+                  No. 71A/1, Sangari, Sankari Main Rd, Nethimedu, Salem, Tamil Nadu 636002, India
                 </a>
               </li>
             </ul>
