@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Twitter, Linkedin, Trophy } from "lucide-react";
+import { Facebook, Instagram, Youtube, Trophy } from "lucide-react";
 
 const FooterSection = () => {
   return (
@@ -21,8 +21,7 @@ const FooterSection = () => {
               {[
                 { icon: Facebook, href: "https://www.facebook.com/nobleworldrecords", label: "Facebook" },
                 { icon: Instagram, href: "#", label: "Instagram" },
-                { icon: Twitter, href: "#", label: "Twitter" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
+                { icon: Youtube, href: "#", label: "YouTube" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}

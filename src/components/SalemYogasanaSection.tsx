@@ -90,13 +90,24 @@ const SalemYogasanaSection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <div className="bg-gradient-to-br from-violet-600 to-indigo-700 rounded-2xl p-6 text-white shadow-lg">
-                            <div className="flex items-center gap-2 mb-3">
-                                <IndianRupee className="w-5 h-5 text-yellow-300" />
-                                <h3 className="font-bold text-base">Entry Fee</h3>
+                        {/* Two fee boxes side by side */}
+                        <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-gradient-to-br from-violet-600 to-indigo-700 rounded-2xl p-5 text-white shadow-lg">
+                                <div className="flex items-center gap-1 mb-2">
+                                    <IndianRupee className="w-4 h-4 text-yellow-300" />
+                                    <h3 className="font-bold text-sm">World Record</h3>
+                                </div>
+                                <p className="text-3xl font-extrabold">₹850</p>
+                                <p className="text-xs text-white/70 mt-1">Per Participant</p>
                             </div>
-                            <p className="text-4xl font-extrabold">₹850</p>
-                            <p className="text-sm text-white/70 mt-1">Per Participant</p>
+                            <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl p-5 text-white shadow-lg">
+                                <div className="flex items-center gap-1 mb-2">
+                                    <IndianRupee className="w-4 h-4 text-yellow-200" />
+                                    <h3 className="font-bold text-sm">National Yoga</h3>
+                                </div>
+                                <p className="text-3xl font-extrabold">₹1250</p>
+                                <p className="text-xs text-white/70 mt-1">Per Participant</p>
+                            </div>
                         </div>
                         <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
                             <div className="flex items-center gap-2 mb-4">

@@ -69,8 +69,8 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
           >
-            <p className="mb-2"><strong className="text-white">World Record Details:</strong> [Placeholder for New Content]</p>
-            <p><strong className="text-white">Our Mission:</strong> Promoting World Record in Martial Arts and Yoga.</p>
+            <p className="mb-2"><strong className="text-white">World Record Details:</strong> Salem Yogasana Festival 2026 - One Hour Non-Stop Advanced Yogasana Performance</p>
+
           </motion.div>
 
           {/* CTAs */}
