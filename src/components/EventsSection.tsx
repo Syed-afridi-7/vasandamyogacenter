@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
+import { GalleryModal } from "./GalleryModal";
 import yoga3 from "@/assets/yoga3.jpg";
 import yoga4 from "@/assets/yoga4.jpg";
 import yoga5 from "@/assets/yoga5.jpg";
@@ -7,25 +9,30 @@ import yoga5 from "@/assets/yoga5.jpg";
 const events = [
   {
     img: yoga5,
-    title: "Tamizharum Silambamum — Shadow Phoenix Martial Arts",
+    title: "Yogasana Fest 2025",
     date: "01 Mar 2026",
-    tag: "Martial Arts",
+    tag: "Event",
+    folder: "2025"
   },
   {
     img: yoga4,
-    title: "Salem Yoga Marathon 2023 — Advanced Yoga Performance",
+    title: "Yogasana Fest 2023",
     date: "2023",
-    tag: "Yoga Marathon",
+    tag: "Event",
+    folder: "2023"
   },
   {
     img: yoga3,
-    title: "Yoga Marathon 2022 — International Yoga Day",
+    title: "Yogasana Fest 2022",
     date: "19 Jun 2022",
-    tag: "Yoga",
+    tag: "Event",
+    folder: "2022"
   },
 ];
 
 const EventsSection = () => {
+  const [selectedEvent, setSelectedEvent] = useState<{ folder: string; title: string } | null>(null);
+
   return (
     <section id="events" className="py-24 bg-muted/30">
       <div className="container mx-auto px-4 md:px-6">
@@ -37,10 +44,10 @@ const EventsSection = () => {
         >
           <span className="section-label mb-4 inline-flex">Achievements &amp; World Record History</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-4 mb-3">
-            Our Journey — 2021 to Present
+            Our Journey — 2022 to Present
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-base">
-            From our first yoga marathon in 2021 to world record events today — a celebration of yoga, community, and competitive sports.
+            Relive the memories from our Yogasana festivals. Click 'View' to see the exclusive photo galleries.
           </p>
         </motion.div>
 
@@ -48,11 +55,12 @@ const EventsSection = () => {
           {events.map((event, i) => (
             <motion.article
               key={i}
-              className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300"
+              className="group bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
+              onClick={() => setSelectedEvent({ folder: event.folder, title: event.title })}
             >
               <div className="relative overflow-hidden aspect-[16/9]">
                 <img
@@ -65,11 +73,11 @@ const EventsSection = () => {
                   {event.tag}
                 </span>
               </div>
-              <div className="p-5">
+              <div className="p-5 flex flex-col justify-between h-32">
                 <h3 className="font-bold text-foreground text-sm leading-snug mb-3 line-clamp-2">
                   {event.title}
                 </h3>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mt-auto">
                   <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
                     <Calendar className="w-3.5 h-3.5" />
                     {event.date}
@@ -83,6 +91,13 @@ const EventsSection = () => {
           ))}
         </div>
       </div>
+
+      <GalleryModal
+        isOpen={!!selectedEvent}
+        onClose={() => setSelectedEvent(null)}
+        folder={selectedEvent?.folder || ""}
+        title={selectedEvent?.title || ""}
+      />
     </section>
   );
 };
