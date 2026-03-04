@@ -103,17 +103,19 @@ function RegistrationForm({
             transition={{ delay: 0.1 }}
         >
             {/* Benefits strip */}
-            <div className="bg-muted/50 rounded-xl p-4 space-y-1.5">
-                <p className="text-xs font-semibold text-foreground mb-2 uppercase tracking-wide">
-                    What you will receive:
-                </p>
-                {benefits.map((b, i) => (
-                    <div key={i} className="flex items-center gap-2 text-sm text-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        {b}
-                    </div>
-                ))}
-            </div>
+            {benefits.length > 0 && (
+                <div className="bg-muted/50 rounded-xl p-4 space-y-1.5">
+                    <p className="text-xs font-semibold text-foreground mb-2 uppercase tracking-wide">
+                        What you will receive:
+                    </p>
+                    {benefits.map((b, i) => (
+                        <div key={i} className="flex items-center gap-2 text-sm text-foreground">
+                            <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                            {b}
+                        </div>
+                    ))}
+                </div>
+            )}
 
             {/* Name */}
             <div className="space-y-1.5">
@@ -249,7 +251,6 @@ const RegistrationSection = () => {
                             accentClass="btn-primary-glow"
                             apiEventValue="world_record"
                             benefits={[
-                                "World Record Certificate & Medal",
                                 "Framed Certificate & Medal",
                             ]}
                         />
@@ -273,12 +274,7 @@ const RegistrationSection = () => {
                             eventLabel="National Yoga Competition"
                             accentClass="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700"
                             apiEventValue="national_yoga"
-                            benefits={[
-                                "Participation Certificate & Medal",
-                                "Framed Certificate",
-                                "Organization Certificate",
-                                "Top Winner Prize",
-                            ]}
+                            benefits={[]}
                         />
                     </motion.div>
                 </div>

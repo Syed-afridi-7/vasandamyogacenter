@@ -119,6 +119,9 @@ const SalemYogasanaSection = () => {
                                 <p className="text-xs text-white/70 mt-1">Per Participant</p>
                             </div>
                         </div>
+                        <p className="text-xs text-center text-muted-foreground font-medium mt-1">
+                            + courier charges applicable
+                        </p>
                         <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
                             <div className="flex items-center gap-2 mb-4">
                                 <Trophy className="w-5 h-5 text-yellow-500" />
