@@ -35,15 +35,15 @@ const CommunitySection = () => {
             </div>
 
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Join Our WhatsApp Community
+              Follow Us on Social Media
             </h2>
             <p className="max-w-xl mx-auto text-white/70 text-base mb-8 leading-relaxed">
-              Connect with a passionate community dedicated to wellness and excellence.
-              Share your journey, learn from others, and help build the next era of Yoga sport.
+              Stay connected with our vibrant community dedicated to wellness and excellence.
+              Follow us for updates, event highlights, and inspiring yoga journeys.
             </p>
 
             <div className="flex items-center justify-center gap-4 mb-10">
-              <a href="#" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
+              <a href="https://www.instagram.com/salemyogasanafestival?utm_source=qr&igsh=aGdycHU4YW1lZDBx" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
                 <Instagram className="w-5 h-5 text-white" />
               </a>
               <a href="#" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
@@ -55,12 +55,12 @@ const CommunitySection = () => {
             </div>
 
             <a
-              href="#"
+              href="https://www.instagram.com/salemyogasanafestival?utm_source=qr&igsh=aGdycHU4YW1lZDBx"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-green-500 text-white px-8 py-4 text-sm font-bold hover:bg-green-600 transition-all duration-200 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 text-sm font-bold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-0.5"
             >
-              Join via WhatsApp
+              Follow on Instagram
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
