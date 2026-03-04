@@ -46,7 +46,7 @@ const SalemYogasanaSection = () => {
                         Advanced Yoga Performance &amp; Awareness Program — Online World Record Event
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
-                        Organised by <strong>Vasantham Yoga Center</strong> · In association with Khelo India &amp; Fit India
+                        Organised by <strong>Vasantham Yoga Center</strong>
                     </p>
                 </motion.div>
 
