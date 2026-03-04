@@ -54,15 +54,26 @@ const CommunitySection = () => {
               </a>
             </div>
 
-            <a
-              href="https://www.instagram.com/salemyogasanafestival?utm_source=qr&igsh=aGdycHU4YW1lZDBx"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 text-sm font-bold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-0.5"
-            >
-              Follow on Instagram
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <a
+                href="https://www.instagram.com/salemyogasanafestival?utm_source=qr&igsh=aGdycHU4YW1lZDBx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 text-sm font-bold hover:from-pink-600 hover:to-purple-700 transition-all duration-200 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-0.5"
+              >
+                Follow on Instagram
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+              <a
+                href="https://wa.me/917092026756"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl bg-green-500 text-white px-8 py-4 text-sm font-bold hover:bg-green-600 transition-all duration-200 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-0.5"
+              >
+                Contact on WhatsApp
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
         </motion.div>
       </div>

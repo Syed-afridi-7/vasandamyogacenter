@@ -23,6 +23,7 @@ const rewards = [
     "Framed Certificate",
     "Organization Certificate",
     "Top Winner Prize",
+    "Courier Charges",
 ];
 
 const SalemYogasanaSection = () => {
@@ -109,19 +110,18 @@ const SalemYogasanaSection = () => {
                                 </div>
                                 <p className="text-3xl font-extrabold">₹850</p>
                                 <p className="text-xs text-white/70 mt-1">Per Participant</p>
+                                <p className="text-xs text-white/80 mt-1.5 font-medium">Certificate & Medal</p>
                             </div>
                             <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl p-5 text-white shadow-lg">
                                 <div className="flex items-center gap-1 mb-2">
                                     <IndianRupee className="w-4 h-4 text-yellow-200" />
-                                    <h3 className="font-bold text-sm">National Yoga</h3>
                                 </div>
                                 <p className="text-3xl font-extrabold">₹1200</p>
                                 <p className="text-xs text-white/70 mt-1">Per Participant</p>
+                                <p className="text-xs text-white/80 mt-1.5 font-medium">Framed Certificate, Certificate & Medal</p>
                             </div>
                         </div>
-                        <p className="text-xs text-center text-muted-foreground font-medium mt-1">
-                            + courier charges applicable
-                        </p>
+
                         <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
                             <div className="flex items-center gap-2 mb-4">
                                 <Trophy className="w-5 h-5 text-yellow-500" />

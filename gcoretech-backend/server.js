@@ -22,46 +22,45 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post("/api/register", async (req, res) => {
-  const { name, age, gender, phone, email, city, experience, event_type } = req.body;
+  const { name, gender, dob, age, address, whatsapp, event_type } = req.body;
 
-  if (!name || !phone || !email || !event_type) {
+  if (!name || !whatsapp || !event_type) {
     return res.status(400).json({ success: false, message: "Missing required fields." });
   }
 
   const eventLabel =
     event_type === "world_record"
       ? "World Record Event (₹850)"
-      : "National Yoga Competition (₹1250)";
+      : "National Yoga Competition (₹1200)";
 
   const mailOptions = {
     from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
     to: process.env.ADMIN_EMAIL,
     subject: `🏅 New Registration: ${name} — ${eventLabel}`,
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
-        <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 24px; text-align: center;">
-          <h1 style="color: white; margin: 0; font-size: 22px;">New Registration Received</h1>
-          <p style="color: rgba(255,255,255,0.8); margin: 6px 0 0;">Salem Yogasana Festival 2026</p>
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 32px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">New Registration</h1>
+          <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0; font-size: 14px; font-weight: 500;">Salem Yogasana Festival 2026</p>
         </div>
-        <div style="padding: 28px; background: #fff;">
+        <div style="padding: 32px; background: #ffffff;">
           <table style="width: 100%; border-collapse: collapse;">
-            <tr><td style="padding: 8px 0; color: #64748b; width: 40%;">👤 Full Name</td><td style="padding: 8px 0; font-weight: bold;">${name}</td></tr>
-            <tr><td style="padding: 8px 0; color: #64748b;">🎂 Age</td><td style="padding: 8px 0;">${age}</td></tr>
-            <tr><td style="padding: 8px 0; color: #64748b;">⚧ Gender</td><td style="padding: 8px 0;">${gender}</td></tr>
-            <tr><td style="padding: 8px 0; color: #64748b;">📞 Phone</td><td style="padding: 8px 0;">${phone}</td></tr>
-            <tr><td style="padding: 8px 0; color: #64748b;">📧 Email</td><td style="padding: 8px 0;">${email}</td></tr>
-            <tr><td style="padding: 8px 0; color: #64748b;">🏙️ City</td><td style="padding: 8px 0;">${city}</td></tr>
-            <tr><td style="padding: 8px 0; color: #64748b;">🧘 Experience</td><td style="padding: 8px 0;">${experience}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; width: 35%; font-size: 14px;">👤 Full Name</td><td style="padding: 12px 0; font-weight: 700; color: #1e293b;">${name}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">⚧ Gender</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b; text-transform: capitalize;">${gender}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">🎂 DOB</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b;">${dob}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">🔢 Age</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b;">${age}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">📞 WhatsApp</td><td style="padding: 12px 0; font-weight: 700; color: #7c3aed;">${whatsapp}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">📍 Address</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b; line-height: 1.5;">${address}</td></tr>
             <tr>
-              <td style="padding: 8px 0; color: #64748b;">🎯 Event</td>
-              <td style="padding: 8px 0;">
-                <span style="background: #7c3aed; color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px;">${eventLabel}</span>
+              <td style="padding: 20px 0 12px; color: #64748b; font-size: 14px;">🎯 Event Type</td>
+              <td style="padding: 20px 0 12px;">
+                <span style="background: #ede9fe; color: #7c3aed; padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 700; border: 1px solid #ddd6fe;">${eventLabel}</span>
               </td>
             </tr>
           </table>
         </div>
-        <div style="background: #f8fafc; padding: 16px 28px; text-align: center; color: #94a3b8; font-size: 12px;">
-          Vasantham Yoga Center — Salem Yogasana Festival 2026
+        <div style="background: #f8fafc; padding: 20px; text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #f1f5f9;">
+          © ${new Date().getFullYear()} Vasantham Yoga Center • Generated by G-Core Technologies
         </div>
       </div>
     `,
@@ -72,7 +71,51 @@ app.post("/api/register", async (req, res) => {
     res.json({ success: true, message: "Registration received! Email sent." });
   } catch (err) {
     console.error("Email error:", err);
-    res.status(500).json({ success: false, message: "Registration saved but email failed." });
+    res.status(500).json({ success: false, message: "Registration processing failed." });
+  }
+});
+
+app.post("/api/contact", async (req, res) => {
+  const { name, phone, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ success: false, message: "Missing required fields." });
+  }
+
+  const mailOptions = {
+    from: `"Salem Yogasana Contact" <${process.env.GMAIL_USER}>`,
+    to: process.env.ADMIN_EMAIL,
+    subject: `✉️ New Message from ${name}`,
+    html: `
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <div style="background: linear-gradient(135deg, #0ea5e9, #2563eb); padding: 32px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">New Inquiry</h1>
+          <p style="color: rgba(255,255,255,0.9); margin: 8px 0 0; font-size: 14px; font-weight: 500;">Salem Yogasana Festival 2026</p>
+        </div>
+        <div style="padding: 32px; background: #ffffff;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr><td style="padding: 12px 0; color: #64748b; width: 30%; font-size: 14px;">👤 Name</td><td style="padding: 12px 0; font-weight: 700; color: #1e293b;">${name}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">📞 Phone</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b;">${phone || "N/A"}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">📧 Email</td><td style="padding: 12px 0; font-weight: 500; color: #2563eb;">${email}</td></tr>
+          </table>
+          <div style="margin-top: 24px; padding: 20px; background: #f8fafc; border-radius: 12px; border: 1px solid #f1f5f9;">
+            <p style="margin: 0 0 8px; color: #64748b; font-size: 12px; font-weight: 700; uppercase; letter-spacing: 0.5px;">Message Content:</p>
+            <p style="margin: 0; color: #1e293b; font-size: 14px; line-height: 1.6; white-space: pre-wrap;">${message}</p>
+          </div>
+        </div>
+        <div style="background: #f8fafc; padding: 20px; text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #f1f5f9;">
+          © ${new Date().getFullYear()} Vasantham Yoga Center • Generated by G-Core Technologies
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.json({ success: true, message: "Inquiry received! Email sent." });
+  } catch (err) {
+    console.error("Email error:", err);
+    res.status(500).json({ success: false, message: "Message sending failed." });
   }
 });
 

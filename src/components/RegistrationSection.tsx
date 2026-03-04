@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
     User, Phone, MapPin, CheckCircle2,
-    Loader2, Trophy, Star, CalendarDays, UsersRound,
+    Loader2, Trophy, CalendarDays, UsersRound,
 } from "lucide-react";
 
 /* ── Shared form state type ─────────────────────────────── */
@@ -102,21 +102,6 @@ function RegistrationForm({
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
         >
-            {/* Benefits strip */}
-            {benefits.length > 0 && (
-                <div className="bg-muted/50 rounded-xl p-4 space-y-1.5">
-                    <p className="text-xs font-semibold text-foreground mb-2 uppercase tracking-wide">
-                        What you will receive:
-                    </p>
-                    {benefits.map((b, i) => (
-                        <div key={i} className="flex items-center gap-2 text-sm text-foreground">
-                            <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                            {b}
-                        </div>
-                    ))}
-                </div>
-            )}
-
             {/* Name */}
             <div className="space-y-1.5">
                 <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
@@ -229,13 +214,13 @@ const RegistrationSection = () => {
                     </p>
                 </motion.div>
 
-                {/* Two Registration Boxes */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                {/* Registration Box */}
+                <div className="max-w-xl mx-auto">
 
                     {/* Box A — World Record Event */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
@@ -250,33 +235,29 @@ const RegistrationSection = () => {
                             eventLabel="World Record Event"
                             accentClass="btn-primary-glow"
                             apiEventValue="world_record"
-                            benefits={[
-                                "Framed Certificate & Medal",
-                            ]}
-                        />
-                    </motion.div>
-
-                    {/* Box B — National Yoga Competition */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <div className="bg-gradient-to-r from-amber-500 to-orange-600 rounded-t-2xl px-8 py-5 flex items-center gap-3">
-                            <Star className="w-6 h-6 text-yellow-100 flex-shrink-0" />
-                            <div>
-                                <h3 className="text-white font-bold text-lg">National Yoga Competition</h3>
-                                <p className="text-white/70 text-xs">Open to All Levels</p>
-                            </div>
-                        </div>
-                        <RegistrationForm
-                            eventLabel="National Yoga Competition"
-                            accentClass="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700"
-                            apiEventValue="national_yoga"
                             benefits={[]}
                         />
+
+                        {/* Benefits strip — Moved below Submit button and above Payment notice */}
+                        <div className="mt-6 bg-muted/50 rounded-2xl p-6 border border-border space-y-3">
+                            <p className="text-sm font-bold text-foreground uppercase tracking-wide flex items-center gap-2">
+                                <Trophy className="w-4 h-4 text-yellow-500" />
+                                What you will receive:
+                            </p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {[
+                                    "Framed Certificate & Medal",
+                                    "Certificate & Medal"
+                                ].map((b, i) => (
+                                    <div key={i} className="flex items-center gap-2 text-sm text-foreground bg-background/50 p-3 rounded-xl border border-border/50">
+                                        <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                                        {b}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </motion.div>
+
                 </div>
 
                 {/* Payment link notice */}
@@ -288,12 +269,12 @@ const RegistrationSection = () => {
                     transition={{ delay: 0.2 }}
                 >
                     <p className="text-sm font-semibold text-foreground mb-1">
-                        🔗 Payment Link
+                        � Payment Method
                     </p>
                     <p className="text-xs text-muted-foreground">
-                        Payment link will be shared on WhatsApp after form submission.
+                        Online pay to this number: <span className="text-foreground font-bold tracking-wider">+91 70920 26756</span>
                         <br />
-                        <span className="text-amber-500 font-medium">Link coming soon — stay tuned!</span>
+                        <span className="text-violet-500 font-medium">GPay / PhonePe / Paytm Accepted</span>
                     </p>
                 </motion.div>
 

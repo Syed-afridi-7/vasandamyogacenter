@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import overviewImg from "@/assets/overview-img.png";
+import overviewImg from "@/assets/overview-img.jpg";
 
 const steps = [
   {
