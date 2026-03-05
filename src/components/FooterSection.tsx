@@ -20,9 +20,9 @@ const FooterSection = () => {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: Facebook, href: "https://www.facebook.com/nobleworldrecords", label: "Facebook" },
+                { icon: Facebook, href: "https://www.facebook.com/share/1LBr6tCXTV/", label: "Facebook" },
                 { icon: Instagram, href: "https://www.instagram.com/salemyogasanafestival?utm_source=qr&igsh=aGdycHU4YW1lZDBx", label: "Instagram" },
-                { icon: Youtube, href: "#", label: "YouTube" },
+                { icon: Youtube, href: "https://www.youtube.com/@Salemyogasanafestival", label: "YouTube" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}

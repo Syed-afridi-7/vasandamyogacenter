@@ -46,10 +46,10 @@ const CommunitySection = () => {
               <a href="https://www.instagram.com/salemyogasanafestival?utm_source=qr&igsh=aGdycHU4YW1lZDBx" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
                 <Instagram className="w-5 h-5 text-white" />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
+              <a href="https://www.facebook.com/share/1LBr6tCXTV/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
                 <Facebook className="w-5 h-5 text-white" />
               </a>
-              <a href="#" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
+              <a href="https://www.youtube.com/@Salemyogasanafestival" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center transition-colors">
                 <Youtube className="w-5 h-5 text-white" />
               </a>
             </div>

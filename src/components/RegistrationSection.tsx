@@ -242,18 +242,13 @@ const RegistrationSection = () => {
                         <div className="mt-6 bg-muted/50 rounded-2xl p-6 border border-border space-y-3">
                             <p className="text-sm font-bold text-foreground uppercase tracking-wide flex items-center gap-2">
                                 <Trophy className="w-4 h-4 text-yellow-500" />
-                                What you will receive:
+                                Upcoming Events:
                             </p>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                {[
-                                    "Framed Certificate & Medal",
-                                    "Certificate & Medal"
-                                ].map((b, i) => (
-                                    <div key={i} className="flex items-center gap-2 text-sm text-foreground bg-background/50 p-3 rounded-xl border border-border/50">
-                                        <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
-                                        {b}
-                                    </div>
-                                ))}
+                            <div className="flex justify-center">
+                                <div className="flex items-center gap-2 text-sm text-foreground bg-background/50 p-4 rounded-xl border border-border/50 text-center w-full justify-center font-medium animate-pulse">
+                                    <Loader2 className="w-4 h-4 text-primary animate-spin" />
+                                    Loading National Yoga Competition...
+                                </div>
                             </div>
                         </div>
                     </motion.div>
