@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
     User, Phone, MapPin, CheckCircle2,
-    Loader2, Trophy, CalendarDays, UsersRound,
+    Loader2, Trophy, CalendarDays, UsersRound, IndianRupee,
 } from "lucide-react";
 
 /* ── Shared form state type ─────────────────────────────── */
@@ -13,10 +13,11 @@ type FormState = {
     age: string;
     address: string;
     whatsapp: string;
+    registrationType: string;
 };
 
 const defaultForm = (): FormState => ({
-    name: "", gender: "", dob: "", age: "", address: "", whatsapp: "",
+    name: "", gender: "", dob: "", age: "", address: "", whatsapp: "", registrationType: "",
 });
 
 /* ── Reusable form component ────────────────────────────── */
@@ -169,6 +170,24 @@ function RegistrationForm({
                     type="tel" name="whatsapp" value={form.whatsapp} onChange={handleChange}
                     required placeholder="+91 00000 00000" className="input-modern"
                 />
+            </div>
+
+            {/* Registration Type */}
+            <div className="space-y-1.5">
+                <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                    <IndianRupee className="w-4 h-4 text-primary" /> Registration Type
+                </label>
+                <select
+                    name="registrationType"
+                    value={form.registrationType}
+                    onChange={handleChange}
+                    required
+                    className="input-modern"
+                >
+                    <option value="">Select Registration Type</option>
+                    <option value="850">₹850</option>
+                    <option value="1200">₹1200</option>
+                </select>
             </div>
 
             {error && (
