@@ -23,7 +23,7 @@ const rewards = [
     "Framed Certificate",
     "Organization Certificate",
     "Top Winner Prize",
-    "Courier Charges",
+    "Courier Charges + Extra Amount",
 ];
 
 const SalemYogasanaSection = () => {
