@@ -1,52 +1,53 @@
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
-    // Add CORS headers so the Vercel deployed frontend can reach this API
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
+  // Add CORS headers so the Vercel deployed frontend can reach this API
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
 
-    // Handle OPTIONS request for preflight CORS
-    if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
-    }
+  // Handle OPTIONS request for preflight CORS
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
-    if (req.method !== 'POST') {
-        return res.status(405).json({ success: false, message: 'Method Not Allowed' });
-    }
+  if (req.method !== 'POST') {
+    return res.status(405).json({ success: false, message: 'Method Not Allowed' });
+  }
 
-    const { name, gender, dob, age, address, whatsapp, event_type, registrationType } = req.body;
+  const { name, email, gender, dob, age, address, whatsapp, event_type, registrationType } = req.body;
 
-    if (!name || !whatsapp || !event_type || !registrationType) {
-        return res.status(400).json({ success: false, message: "Missing required fields." });
-    }
+  if (!name || !email || !whatsapp || !event_type || !registrationType) {
+    return res.status(400).json({ success: false, message: "Missing required fields." });
+  }
 
-    const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false, // STARTTLS
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASS,
-        },
-        tls: {
-            rejectUnauthorized: false,
-        },
-    });
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // STARTTLS
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
 
-    let eventLabel = event_type === "world_record" ? "World Record Event" : "National Yoga Competition";
-    eventLabel += ` (₹${registrationType})`;
+  let eventLabel = event_type === "world_record" ? "World Record Event" : "National Yoga Competition";
+  eventLabel += ` (₹${registrationType})`;
 
-    const mailOptions = {
-        from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
-        to: process.env.ADMIN_EMAIL,
-        subject: `🏅 New Registration: ${name} — ${eventLabel}`,
-        html: `
+  const mailOptionsAdmin = {
+    from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
+    to: process.env.ADMIN_EMAIL,
+    replyTo: email,
+    subject: `🏅 New Registration: ${name} — ${eventLabel}`,
+    html: `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
         <div style="background: linear-gradient(135deg, #7c3aed, #4f46e5); padding: 32px; text-align: center;">
           <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">New Registration</h1>
@@ -55,6 +56,7 @@ export default async function handler(req, res) {
         <div style="padding: 32px; background: #ffffff;">
           <table style="width: 100%; border-collapse: collapse;">
             <tr><td style="padding: 12px 0; color: #64748b; width: 35%; font-size: 14px;">👤 Full Name</td><td style="padding: 12px 0; font-weight: 700; color: #1e293b;">${name}</td></tr>
+            <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">📧 Email</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b;">${email}</td></tr>
             <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">⚧ Gender</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b; text-transform: capitalize;">${gender}</td></tr>
             <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">🎂 DOB</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b;">${dob}</td></tr>
             <tr><td style="padding: 12px 0; color: #64748b; font-size: 14px;">🔢 Age</td><td style="padding: 12px 0; font-weight: 500; color: #1e293b;">${age}</td></tr>
@@ -73,13 +75,37 @@ export default async function handler(req, res) {
         </div>
       </div>
     `,
-    };
+  };
 
-    try {
-        await transporter.sendMail(mailOptions);
-        res.status(200).json({ success: true, message: "Registration received! Email sent." });
-    } catch (err) {
-        console.error("Email error:", err);
-        res.status(500).json({ success: false, message: "Registration processing failed." });
-    }
+  const mailOptionsUser = {
+    from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
+    to: email,
+    subject: `✅ Registration Successful: ${eventLabel}`,
+    html: `
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 32px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">Registration Successful! 🎉</h1>
+        </div>
+        <div style="padding: 32px; background: #ffffff;">
+          <p style="color: #334155; font-size: 16px; line-height: 1.6;">Hi <strong>${name}</strong>,</p>
+          <p style="color: #334155; font-size: 16px; line-height: 1.6;">Thank you for registering for the <strong>${eventLabel}</strong>. We have received your details.</p>
+          <p style="color: #334155; font-size: 16px; line-height: 1.6;">Our team will reach out to you on your WhatsApp number (<strong>${whatsapp}</strong>) regarding payment and further instructions.</p>
+          <br/>
+          <p style="color: #334155; font-size: 14px; line-height: 1.6;">If you have any questions, feel free to reply to this email.</p>
+        </div>
+        <div style="background: #f8fafc; padding: 20px; text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #f1f5f9;">
+          — Salem Yogasana Festival 2026 Team
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptionsAdmin);
+    await transporter.sendMail(mailOptionsUser);
+    res.status(200).json({ success: true, message: "Registration received! Confirmation email sent." });
+  } catch (err) {
+    console.error("Email error:", err);
+    res.status(500).json({ success: false, message: "Registration processing failed." });
+  }
 }

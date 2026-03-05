@@ -2,12 +2,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
     User, Phone, MapPin, CheckCircle2,
-    Loader2, Trophy, CalendarDays, UsersRound, IndianRupee,
+    Loader2, Trophy, CalendarDays, UsersRound, IndianRupee, Mail
 } from "lucide-react";
 
 /* ── Shared form state type ─────────────────────────────── */
 type FormState = {
     name: string;
+    email: string;
     gender: string;
     dob: string;
     age: string;
@@ -17,7 +18,7 @@ type FormState = {
 };
 
 const defaultForm = (): FormState => ({
-    name: "", gender: "", dob: "", age: "", address: "", whatsapp: "", registrationType: "",
+    name: "", email: "", gender: "", dob: "", age: "", address: "", whatsapp: "", registrationType: "",
 });
 
 /* ── Reusable form component ────────────────────────────── */
@@ -111,6 +112,17 @@ function RegistrationForm({
                 <input
                     type="text" name="name" value={form.name} onChange={handleChange}
                     required placeholder="Enter your full name" className="input-modern"
+                />
+            </div>
+
+            {/* Email */}
+            <div className="space-y-1.5">
+                <label className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                    <Mail className="w-4 h-4 text-primary" /> Email Address
+                </label>
+                <input
+                    type="email" name="email" value={form.email} onChange={handleChange}
+                    required placeholder="example@gmail.com" className="input-modern"
                 />
             </div>
 
