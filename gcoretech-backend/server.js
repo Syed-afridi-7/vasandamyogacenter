@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
+  service: "gmail",
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // STARTTLS
@@ -20,6 +21,11 @@ const transporter = nodemailer.createTransport({
     rejectUnauthorized: false,
   },
 });
+
+// Verify SMTP connection on startup
+transporter.verify()
+  .then(() => console.log("[SMTP] Connection verified successfully."))
+  .catch((err) => console.error("[SMTP] Connection verification FAILED:", err.message));
 
 app.post("/api/register", async (req, res) => {
   const { name, email, gender, dob, age, address, whatsapp, event_type, registrationType } = req.body;
@@ -106,19 +112,24 @@ app.post("/api/register", async (req, res) => {
   };
 
   try {
-    await transporter.sendMail(mailOptionsAdmin);
+    const adminResult = await transporter.sendMail(mailOptionsAdmin);
+    console.log("[register] Admin email sent successfully. MessageId:", adminResult.messageId);
   } catch (err) {
-    console.error("[register] Failed to send admin email:", err);
-    return res.status(500).json({ success: false, message: "Registration processing failed. Notify Admin." });
+    console.error("[register] Failed to send admin email:", err.message, err.code);
+    return res.status(500).json({
+      success: false,
+      message: "Registration failed — could not send email. Please try again or contact us on WhatsApp."
+    });
   }
 
   try {
-    await transporter.sendMail(mailOptionsUser);
+    const userResult = await transporter.sendMail(mailOptionsUser);
+    console.log("[register] User auto-reply sent. MessageId:", userResult.messageId);
   } catch (err) {
-    console.warn("[register] User auto-reply bounced or failed. Error:", err.message);
+    console.warn("[register] User auto-reply failed. Error:", err.message);
   }
 
-  res.status(200).json({ success: true, message: "Registration received! Confirmation email logic processed." });
+  res.status(200).json({ success: true, message: "Registration received! Confirmation email sent." });
 });
 
 app.post("/api/contact", async (req, res) => {

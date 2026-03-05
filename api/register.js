@@ -43,6 +43,7 @@ export default async function handler(req, res) {
   }
 
   const transporter = nodemailer.createTransport({
+    service: "gmail",
     host: "smtp.gmail.com",
     port: 587,
     secure: false, // STARTTLS
@@ -54,6 +55,18 @@ export default async function handler(req, res) {
       rejectUnauthorized: false,
     },
   });
+
+  // Verify SMTP connection before sending
+  try {
+    await transporter.verify();
+    console.log("[register] SMTP connection verified successfully.");
+  } catch (verifyErr) {
+    console.error("[register] SMTP verification failed:", verifyErr.message);
+    return res.status(500).json({
+      success: false,
+      message: "Email service connection failed. Please try again later."
+    });
+  }
 
   let eventLabel = event_type === "world_record" ? "World Record Event" : "National Yoga Competition";
   eventLabel += ` (₹${registrationType})`;
@@ -118,18 +131,23 @@ export default async function handler(req, res) {
 
   try {
     // 1. Send Critical Admin Email
-    await transporter.sendMail(mailOptionsAdmin);
+    const adminResult = await transporter.sendMail(mailOptionsAdmin);
+    console.log("[register] Admin email sent successfully. MessageId:", adminResult.messageId);
   } catch (err) {
-    console.error("[register] Failed to send admin email:", err);
-    return res.status(500).json({ success: false, message: "Registration processing failed. Notify Admin." });
+    console.error("[register] Failed to send admin email:", err.message, err.code);
+    return res.status(500).json({
+      success: false,
+      message: "Registration failed — could not send email. Please try again or contact us on WhatsApp."
+    });
   }
 
   try {
     // 2. Send Non-Critical User Auto-Reply
-    await transporter.sendMail(mailOptionsUser);
+    const userResult = await transporter.sendMail(mailOptionsUser);
+    console.log("[register] User auto-reply sent. MessageId:", userResult.messageId);
   } catch (err) {
     // Log softly; do NOT fail the response, as the admin already received the registration.
-    console.warn("[register] User auto-reply bounced or failed. Error:", err.message);
+    console.warn("[register] User auto-reply failed. Error:", err.message);
   }
 
   // Always return success if the critical admin email succeeded

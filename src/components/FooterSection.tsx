@@ -81,7 +81,7 @@ const FooterSection = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 text-xs text-slate-500">
           <div className="space-y-1">
             <p>&copy; {new Date().getFullYear()} Vasantham Yoga Center. All rights reserved.</p>
-            <p><a href="https://gcoretechnologies.in/" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:text-violet-300 font-medium transition-colors">G-Core Technologies</a></p>
+            <p>developed by:<a href="https://gcoretechnologies.in/" target="_blank" rel="noopener noreferrer" className="text-violet-400 hover:text-violet-300 font-medium transition-colors">G-Core Technologies</a></p>
           </div>
           <div className="flex gap-6">
             <a href="/privacy" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
