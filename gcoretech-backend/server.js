@@ -28,12 +28,28 @@ app.post("/api/register", async (req, res) => {
     return res.status(400).json({ success: false, message: "Missing required fields." });
   }
 
+  // Validate Email Format
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!EMAIL_REGEX.test(email)) {
+    return res.status(400).json({ success: false, message: "Invalid email format." });
+  }
+
+  // Environment Variable Guard
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPass = process.env.GMAIL_PASS;
+  const adminEmail = process.env.ADMIN_EMAIL;
+
+  if (!gmailUser || !gmailPass || !adminEmail) {
+    console.error("[register] Missing Gmail/Admin environment variables.");
+    return res.status(500).json({ success: false, message: "Server configuration error." });
+  }
+
   let eventLabel = event_type === "world_record" ? "World Record Event" : "National Yoga Competition";
   eventLabel += ` (₹${registrationType})`;
 
   const mailOptionsAdmin = {
-    from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
-    to: process.env.ADMIN_EMAIL,
+    from: `"Salem Yogasana Festival 2026" <${gmailUser}>`,
+    to: adminEmail,
     replyTo: email,
     subject: `🏅 New Registration: ${name} — ${eventLabel}`,
     html: `
@@ -67,7 +83,7 @@ app.post("/api/register", async (req, res) => {
   };
 
   const mailOptionsUser = {
-    from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
+    from: `"Salem Yogasana Festival 2026" <${gmailUser}>`,
     to: email,
     subject: `✅ Registration Successful: ${eventLabel}`,
     html: `
@@ -91,12 +107,18 @@ app.post("/api/register", async (req, res) => {
 
   try {
     await transporter.sendMail(mailOptionsAdmin);
-    await transporter.sendMail(mailOptionsUser);
-    res.json({ success: true, message: "Registration received! Confirmation email sent." });
   } catch (err) {
-    console.error("Email error:", err);
-    res.status(500).json({ success: false, message: "Registration processing failed." });
+    console.error("[register] Failed to send admin email:", err);
+    return res.status(500).json({ success: false, message: "Registration processing failed. Notify Admin." });
   }
+
+  try {
+    await transporter.sendMail(mailOptionsUser);
+  } catch (err) {
+    console.warn("[register] User auto-reply bounced or failed. Error:", err.message);
+  }
+
+  res.status(200).json({ success: true, message: "Registration received! Confirmation email logic processed." });
 });
 
 app.post("/api/contact", async (req, res) => {
@@ -106,9 +128,23 @@ app.post("/api/contact", async (req, res) => {
     return res.status(400).json({ success: false, message: "Missing required fields." });
   }
 
-  const mailOptions = {
-    from: `"Salem Yogasana Contact" <${process.env.GMAIL_USER}>`,
-    to: process.env.ADMIN_EMAIL,
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!EMAIL_REGEX.test(email)) {
+    return res.status(400).json({ success: false, message: "Invalid email format." });
+  }
+
+  const gmailUser = process.env.GMAIL_USER;
+  const adminEmail = process.env.ADMIN_EMAIL;
+
+  if (!gmailUser || !process.env.GMAIL_PASS || !adminEmail) {
+    console.error("[contact] Missing Gmail/Admin environment variables.");
+    return res.status(500).json({ success: false, message: "Server configuration error." });
+  }
+
+  const mailOptionsAdmin = {
+    from: `"Salem Yogasana Contact" <${gmailUser}>`,
+    to: adminEmail,
+    replyTo: email,
     subject: `✉️ New Message from ${name}`,
     html: `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
@@ -134,13 +170,40 @@ app.post("/api/contact", async (req, res) => {
     `,
   };
 
+  const mailOptionsUser = {
+    from: `"Salem Yogasana Contact" <${gmailUser}>`,
+    to: email,
+    subject: `✅ Message Received: Salem Yogasana Festival`,
+    html: `
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <div style="background: linear-gradient(135deg, #0ea5e9, #2563eb); padding: 32px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">Thank you for your inquiry!</h1>
+        </div>
+        <div style="padding: 32px; background: #ffffff;">
+          <p style="color: #334155; font-size: 16px; line-height: 1.6;">Hi <strong>${name}</strong>,</p>
+          <p style="color: #334155; font-size: 16px; line-height: 1.6;">We have received your message and will get back to you as soon as possible.</p>
+        </div>
+        <div style="background: #f8fafc; padding: 20px; text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #f1f5f9;">
+          — Salem Yogasana Festival 2026 Team
+        </div>
+      </div>
+    `,
+  };
+
   try {
-    await transporter.sendMail(mailOptions);
-    res.json({ success: true, message: "Inquiry received! Email sent." });
+    await transporter.sendMail(mailOptionsAdmin);
   } catch (err) {
-    console.error("Email error:", err);
-    res.status(500).json({ success: false, message: "Message sending failed." });
+    console.error("[contact] Failed to send admin email:", err);
+    return res.status(500).json({ success: false, message: "Message sending failed. Admin notification error." });
   }
+
+  try {
+    await transporter.sendMail(mailOptionsUser);
+  } catch (err) {
+    console.warn("[contact] User auto-reply bounced or failed. Error:", err.message);
+  }
+
+  res.status(200).json({ success: true, message: "Inquiry received! Email sent." });
 });
 
 const PORT = process.env.PORT || 5000;

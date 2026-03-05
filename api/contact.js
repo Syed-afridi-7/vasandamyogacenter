@@ -1,49 +1,66 @@
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
-    // Add CORS headers so the Vercel deployed frontend can reach this API
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
+  // Add CORS headers so the Vercel deployed frontend can reach this API
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+  );
 
-    // Handle OPTIONS request for preflight CORS
-    if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
-    }
+  // Handle OPTIONS request for preflight CORS
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
-    if (req.method !== 'POST') {
-        return res.status(405).json({ success: false, message: 'Method Not Allowed' });
-    }
+  if (req.method !== 'POST') {
+    return res.status(405).json({ success: false, message: 'Method Not Allowed' });
+  }
 
-    const { name, phone, email, message } = req.body;
+  const { name, phone, email, message } = req.body;
 
-    if (!name || !email || !message) {
-        return res.status(400).json({ success: false, message: "Missing required fields." });
-    }
+  if (!name || !email || !message) {
+    return res.status(400).json({ success: false, message: "Missing required fields." });
+  }
 
-    const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
-        secure: false, // STARTTLS
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASS,
-        },
-        tls: {
-            rejectUnauthorized: false, // Helpful sometimes depending on deployment
-        },
-    });
+  // Validate Email Format
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!EMAIL_REGEX.test(email)) {
+    return res.status(400).json({ success: false, message: "Invalid email format." });
+  }
 
-    const mailOptions = {
-        from: `"Salem Yogasana Contact" <${process.env.GMAIL_USER}>`,
-        to: process.env.ADMIN_EMAIL,
-        subject: `✉️ New Message from ${name}`,
-        html: `
+  // Environment Variable Guard
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPass = process.env.GMAIL_PASS;
+  const adminEmail = process.env.ADMIN_EMAIL;
+
+  if (!gmailUser || !gmailPass || !adminEmail) {
+    console.error("[contact] Missing Gmail/Admin environment variables.");
+    return res.status(500).json({ success: false, message: "Server configuration error." });
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // STARTTLS
+    auth: {
+      user: gmailUser,
+      pass: gmailPass,
+    },
+    tls: {
+      rejectUnauthorized: false, // Helpful sometimes depending on deployment
+    },
+  });
+
+  const mailOptionsAdmin = {
+    from: `"Salem Yogasana Contact" <${gmailUser}>`,
+    to: adminEmail,
+    replyTo: email,
+    subject: `✉️ New Message from ${name}`,
+    html: `
       <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
         <div style="background: linear-gradient(135deg, #0ea5e9, #2563eb); padding: 32px; text-align: center;">
           <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">New Inquiry</h1>
@@ -65,13 +82,43 @@ export default async function handler(req, res) {
         </div>
       </div>
     `,
-    };
+  };
 
-    try {
-        await transporter.sendMail(mailOptions);
-        res.status(200).json({ success: true, message: "Inquiry received! Email sent." });
-    } catch (err) {
-        console.error("Email error:", err);
-        res.status(500).json({ success: false, message: "Message sending failed." });
-    }
+  const mailOptionsUser = {
+    from: `"Salem Yogasana Contact" <${gmailUser}>`,
+    to: email,
+    subject: `✅ Message Received: Salem Yogasana Festival`,
+    html: `
+      <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+        <div style="background: linear-gradient(135deg, #0ea5e9, #2563eb); padding: 32px; text-align: center;">
+          <h1 style="color: white; margin: 0; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">Thank you for your inquiry!</h1>
+        </div>
+        <div style="padding: 32px; background: #ffffff;">
+          <p style="color: #334155; font-size: 16px; line-height: 1.6;">Hi <strong>${name}</strong>,</p>
+          <p style="color: #334155; font-size: 16px; line-height: 1.6;">We have received your message and will get back to you as soon as possible.</p>
+        </div>
+        <div style="background: #f8fafc; padding: 20px; text-align: center; color: #94a3b8; font-size: 12px; border-top: 1px solid #f1f5f9;">
+          — Salem Yogasana Festival 2026 Team
+        </div>
+      </div>
+    `,
+  };
+
+  try {
+    // 1. Send Critical Admin Email
+    await transporter.sendMail(mailOptionsAdmin);
+  } catch (err) {
+    console.error("[contact] Failed to send admin email:", err);
+    return res.status(500).json({ success: false, message: "Message sending failed. Admin notification error." });
+  }
+
+  try {
+    // 2. Send Non-Critical User Auto-Reply
+    await transporter.sendMail(mailOptionsUser);
+  } catch (err) {
+    // Do not fail the request; log it
+    console.warn("[contact] User auto-reply bounced or failed. Error:", err.message);
+  }
+
+  return res.status(200).json({ success: true, message: "Inquiry received! Email sent." });
 }

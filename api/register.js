@@ -26,13 +26,29 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, message: "Missing required fields." });
   }
 
+  // Validate Email Format
+  const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  if (!EMAIL_REGEX.test(email)) {
+    return res.status(400).json({ success: false, message: "Invalid email format." });
+  }
+
+  // Environment Variable Guard
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPass = process.env.GMAIL_PASS;
+  const adminEmail = process.env.ADMIN_EMAIL;
+
+  if (!gmailUser || !gmailPass || !adminEmail) {
+    console.error("[register] Missing Gmail/Admin environment variables.");
+    return res.status(500).json({ success: false, message: "Server configuration error." });
+  }
+
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
     secure: false, // STARTTLS
     auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
+      user: gmailUser,
+      pass: gmailPass,
     },
     tls: {
       rejectUnauthorized: false,
@@ -43,8 +59,8 @@ export default async function handler(req, res) {
   eventLabel += ` (₹${registrationType})`;
 
   const mailOptionsAdmin = {
-    from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
-    to: process.env.ADMIN_EMAIL,
+    from: `"Salem Yogasana Festival 2026" <${gmailUser}>`,
+    to: adminEmail,
     replyTo: email,
     subject: `🏅 New Registration: ${name} — ${eventLabel}`,
     html: `
@@ -78,7 +94,7 @@ export default async function handler(req, res) {
   };
 
   const mailOptionsUser = {
-    from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
+    from: `"Salem Yogasana Festival 2026" <${gmailUser}>`,
     to: email,
     subject: `✅ Registration Successful: ${eventLabel}`,
     html: `
@@ -101,11 +117,21 @@ export default async function handler(req, res) {
   };
 
   try {
+    // 1. Send Critical Admin Email
     await transporter.sendMail(mailOptionsAdmin);
-    await transporter.sendMail(mailOptionsUser);
-    res.status(200).json({ success: true, message: "Registration received! Confirmation email sent." });
   } catch (err) {
-    console.error("Email error:", err);
-    res.status(500).json({ success: false, message: "Registration processing failed." });
+    console.error("[register] Failed to send admin email:", err);
+    return res.status(500).json({ success: false, message: "Registration processing failed. Notify Admin." });
   }
+
+  try {
+    // 2. Send Non-Critical User Auto-Reply
+    await transporter.sendMail(mailOptionsUser);
+  } catch (err) {
+    // Log softly; do NOT fail the response, as the admin already received the registration.
+    console.warn("[register] User auto-reply bounced or failed. Error:", err.message);
+  }
+
+  // Always return success if the critical admin email succeeded
+  return res.status(200).json({ success: true, message: "Registration received! Confirmation email sent." });
 }

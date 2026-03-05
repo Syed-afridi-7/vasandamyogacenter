@@ -42,34 +42,34 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
  * HTML-escape a string so it is safe to embed inside an HTML email body.
  */
 function escapeHtml(raw: string): string {
-    return raw
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+  return raw
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 /**
  * Build a JSON response with the correct Content-Type header.
  */
 function json(statusCode: number, body: Record<string, unknown>) {
-    return {
-        statusCode,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-    };
+  return {
+    statusCode,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
 }
 
 // ─── Email templates ──────────────────────────────────────────────────────────
 
 function buildHtmlEmail(name: string, email: string, phone: string, message: string): string {
-    const safeName = escapeHtml(name);
-    const safeEmail = escapeHtml(email);
-    const safePhone = escapeHtml(phone);
-    const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
+  const safeName = escapeHtml(name);
+  const safeEmail = escapeHtml(email);
+  const safePhone = escapeHtml(phone);
+  const safeMessage = escapeHtml(message).replace(/\n/g, "<br>");
 
-    return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="margin:0;padding:0;background:#f3f4f6;font-family:Arial,sans-serif;">
@@ -130,8 +130,8 @@ function buildHtmlEmail(name: string, email: string, phone: string, message: str
 }
 
 function buildAutoReplyHtml(name: string): string {
-    const safeName = escapeHtml(name);
-    return `<!DOCTYPE html>
+  const safeName = escapeHtml(name);
+  return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"></head>
 <body style="margin:0;padding:0;background:#f3f4f6;font-family:Arial,sans-serif;">
@@ -164,87 +164,91 @@ function buildAutoReplyHtml(name: string): string {
 // ─── Handler ──────────────────────────────────────────────────────────────────
 
 const handler: Handler = async (event: HandlerEvent, _ctx: HandlerContext) => {
-    // 1. Method guard
-    if (event.httpMethod !== "POST") {
-        return json(405, { success: false, error: "Method not allowed" });
-    }
+  // 1. Method guard
+  if (event.httpMethod !== "POST") {
+    return json(405, { success: false, error: "Method not allowed" });
+  }
 
-    // 2. Parse body
-    let body: Record<string, unknown>;
-    try {
-        body = JSON.parse(event.body ?? "{}");
-    } catch {
-        return json(400, { success: false, error: "Invalid JSON body" });
-    }
+  // 2. Parse body
+  let body: Record<string, unknown>;
+  try {
+    body = JSON.parse(event.body ?? "{}");
+  } catch {
+    return json(400, { success: false, error: "Invalid JSON body" });
+  }
 
-    // 3. Extract & trim
-    const name = String(body.name ?? "").trim();
-    const email = String(body.email ?? "").trim();
-    const phone = String(body.phone ?? "").trim();
-    const message = String(body.message ?? "").trim();
+  // 3. Extract & trim
+  const name = String(body.name ?? "").trim();
+  const email = String(body.email ?? "").trim();
+  const phone = String(body.phone ?? "").trim();
+  const message = String(body.message ?? "").trim();
 
-    // 4. Validate required fields
-    const errors: string[] = [];
-    if (!name) errors.push("name is required");
-    if (!email) errors.push("email is required");
-    if (!message) errors.push("message is required");
+  // 4. Validate required fields
+  const errors: string[] = [];
+  if (!name) errors.push("name is required");
+  if (!email) errors.push("email is required");
+  if (!message) errors.push("message is required");
 
-    if (errors.length) {
-        return json(400, { success: false, error: `Validation failed: ${errors.join(", ")}` });
-    }
+  if (errors.length) {
+    return json(400, { success: false, error: `Validation failed: ${errors.join(", ")}` });
+  }
 
-    // 5. Email format check
-    if (!EMAIL_REGEX.test(email)) {
-        return json(400, { success: false, error: "Validation failed: invalid email address" });
-    }
+  // 5. Email format check
+  if (!EMAIL_REGEX.test(email)) {
+    return json(400, { success: false, error: "Validation failed: invalid email address" });
+  }
 
-    // 6. Max-length guards
-    if (name.length > MAX_NAME_LEN) return json(400, { success: false, error: `name must be ≤ ${MAX_NAME_LEN} characters` });
-    if (email.length > MAX_EMAIL_LEN) return json(400, { success: false, error: `email must be ≤ ${MAX_EMAIL_LEN} characters` });
-    if (message.length > MAX_MESSAGE_LEN) return json(400, { success: false, error: `message must be ≤ ${MAX_MESSAGE_LEN} characters` });
+  // 6. Max-length guards
+  if (name.length > MAX_NAME_LEN) return json(400, { success: false, error: `name must be ≤ ${MAX_NAME_LEN} characters` });
+  if (email.length > MAX_EMAIL_LEN) return json(400, { success: false, error: `email must be ≤ ${MAX_EMAIL_LEN} characters` });
+  if (message.length > MAX_MESSAGE_LEN) return json(400, { success: false, error: `message must be ≤ ${MAX_MESSAGE_LEN} characters` });
 
-    // 7. Env vars
-    const gmailUser = process.env.GMAIL_USER;
-    const gmailPass = process.env.GMAIL_PASS;
-    const adminEmail = process.env.ADMIN_EMAIL;
+  // 7. Env vars
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPass = process.env.GMAIL_PASS;
+  const adminEmail = process.env.ADMIN_EMAIL;
 
-    if (!gmailUser || !gmailPass || !adminEmail) {
-        console.error("[contact] Missing environment variables");
-        return json(500, { success: false, error: "Server configuration error" });
-    }
+  if (!gmailUser || !gmailPass || !adminEmail) {
+    console.error("[contact] Missing environment variables");
+    return json(500, { success: false, error: "Server configuration error" });
+  }
 
-    // 8. Nodemailer transporter (Gmail SMTP, TLS)
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        secure: true,
-        auth: { user: gmailUser, pass: gmailPass },
+  // 8. Nodemailer transporter (Gmail SMTP, TLS)
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    secure: true,
+    auth: { user: gmailUser, pass: gmailPass },
+  });
+
+  try {
+    // Admin notification
+    await transporter.sendMail({
+      from: `"NWR Contact Form" <${gmailUser}>`,
+      replyTo: email,
+      to: adminEmail,
+      subject: `📩 New Enquiry from ${escapeHtml(name)} — Noble World Records`,
+      text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || "N/A"}\n\nMessage:\n${message}`,
+      html: buildHtmlEmail(name, email, phone, message),
     });
+  } catch (err) {
+    console.error("[contact] Failed to send admin email:", err);
+    return json(500, { success: false, error: "Server error. Admin notification failed." });
+  }
 
-    try {
-        // Admin notification
-        await transporter.sendMail({
-            from: `"NWR Contact Form" <${gmailUser}>`,
-            replyTo: email,
-            to: adminEmail,
-            subject: `📩 New Enquiry from ${escapeHtml(name)} — Noble World Records`,
-            text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || "N/A"}\n\nMessage:\n${message}`,
-            html: buildHtmlEmail(name, email, phone, message),
-        });
+  try {
+    // Auto-reply to sender
+    await transporter.sendMail({
+      from: `"Noble World Records" <${gmailUser}>`,
+      to: email,
+      subject: "✅ We received your message — Noble World Records",
+      text: `Hi ${name},\n\nThank you for reaching out! We will get back to you shortly.\n\n— Noble World Records Team`,
+      html: buildAutoReplyHtml(name),
+    });
+  } catch (err: any) {
+    console.warn("[contact] User auto-reply bounced or failed. Error:", err.message);
+  }
 
-        // Auto-reply to sender
-        await transporter.sendMail({
-            from: `"Noble World Records" <${gmailUser}>`,
-            to: email,
-            subject: "✅ We received your message — Noble World Records",
-            text: `Hi ${name},\n\nThank you for reaching out! We will get back to you shortly.\n\n— Noble World Records Team`,
-            html: buildAutoReplyHtml(name),
-        });
-
-        return json(200, { success: true, message: "Email sent successfully" });
-    } catch (err) {
-        console.error("[contact] Nodemailer error:", err);
-        return json(500, { success: false, error: "Server error. Please try again later." });
-    }
+  return json(200, { success: true, message: "Email sent successfully" });
 };
 
 export { handler };
