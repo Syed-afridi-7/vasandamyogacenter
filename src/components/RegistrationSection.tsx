@@ -167,7 +167,7 @@ function RegistrationForm({
                 </label>
                 <input
                     type="tel" name="whatsapp" value={form.whatsapp} onChange={handleChange}
-                    required placeholder="+91 98765 43210" className="input-modern"
+                    required placeholder="+91 00000 00000" className="input-modern"
                 />
             </div>
 
