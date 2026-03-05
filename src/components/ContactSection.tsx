@@ -2,9 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Send, CheckCircle2, Loader2 } from "lucide-react";
 
-// Netlify Function endpoint — works locally (netlify dev) and on production
-// Backend endpoint for contact form
-const API_ENDPOINT = "http://localhost:5000/api/contact";
+// Backend endpoint for contact form (Vercel Serverless Function)
+const API_ENDPOINT = "/api/contact";
 
 const contactInfo = [
   { icon: Phone, label: "Phone", value: "+91 70920 26756", href: "tel:+917092026756" },
