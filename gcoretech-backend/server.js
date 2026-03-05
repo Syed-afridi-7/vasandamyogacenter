@@ -22,16 +22,14 @@ const transporter = nodemailer.createTransport({
 });
 
 app.post("/api/register", async (req, res) => {
-  const { name, gender, dob, age, address, whatsapp, event_type } = req.body;
+  const { name, gender, dob, age, address, whatsapp, event_type, registrationType } = req.body;
 
-  if (!name || !whatsapp || !event_type) {
+  if (!name || !whatsapp || !event_type || !registrationType) {
     return res.status(400).json({ success: false, message: "Missing required fields." });
   }
 
-  const eventLabel =
-    event_type === "world_record"
-      ? "World Record Event (₹850)"
-      : "National Yoga Competition (₹1200)";
+  let eventLabel = event_type === "world_record" ? "World Record Event" : "National Yoga Competition";
+  eventLabel += ` (₹${registrationType})`;
 
   const mailOptions = {
     from: `"Salem Yogasana Festival 2026" <${process.env.GMAIL_USER}>`,
