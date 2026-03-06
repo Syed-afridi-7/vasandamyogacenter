@@ -298,9 +298,9 @@ const RegistrationSection = () => {
                         � Payment Method
                     </p>
                     <p className="text-xs text-muted-foreground">
-                        Online pay to this number: <span className="text-foreground font-bold tracking-wider">+91 70920 26756</span>
+                        <b>GPay No:</b> <span className="text-foreground font-bold tracking-wider text-sm">+91 70920 26756</span>
                         <br />
-                        <span className="text-violet-500 font-medium">GPay / PhonePe / Paytm Accepted</span>
+                        <span className="text-violet-500 font-medium"><b>GPay / PhonePe / Paytm Accepted</b></span>
                     </p>
                 </motion.div>
 

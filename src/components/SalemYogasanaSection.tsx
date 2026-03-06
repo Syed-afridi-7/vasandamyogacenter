@@ -115,6 +115,7 @@ const SalemYogasanaSection = () => {
                             <div className="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl p-5 text-white shadow-lg">
                                 <div className="flex items-center gap-1 mb-2">
                                     <IndianRupee className="w-4 h-4 text-yellow-200" />
+                                    <h3 className="font-bold text-sm">World Record</h3>
                                 </div>
                                 <p className="text-3xl font-extrabold">₹1200</p>
                                 <p className="text-xs text-white/70 mt-1">Per Participant</p>
