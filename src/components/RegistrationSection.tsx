@@ -297,10 +297,10 @@ const RegistrationSection = () => {
                     <p className="text-sm font-semibold text-foreground mb-1">
                         � Payment Method
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                        <b>GPay No:</b> <span className="text-foreground font-bold tracking-wider text-sm">+91 70920 26756</span>
-                        <br />
-                        <span className="text-violet-500 font-medium"><b>GPay / PhonePe / Paytm Accepted</b></span>
+                    <p className="text-xs text-muted-foreground flex flex-col items-center gap-1">
+                        <span className="text-sm font-semibold text-foreground">GPay No:</span>
+                        <span className="text-foreground font-bold tracking-wider text-2xl md:text-3xl">+91 70920 26756</span>
+                        <span className="text-violet-500 font-medium mt-1"><b>GPay / PhonePe / Paytm Accepted</b></span>
                     </p>
                 </motion.div>
 
