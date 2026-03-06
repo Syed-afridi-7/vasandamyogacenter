@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"\nrequire\\('dotenv'\\).config\\({ path: '../.env' }\\);\nconst nodemailer = require\\('nodemailer'\\);\n\nconst transporter = nodemailer.createTransport\\({\n  service: 'gmail',\n  host: 'smtp.gmail.com',\n  port: 587,\n  secure: false,\n  auth: {\n    user: process.env.GMAIL_USER,\n    pass: process.env.GMAIL_PASS,\n  },\n  tls: { rejectUnauthorized: false },\n}\\);\n\n// Send a test registration email to admin\ntransporter.sendMail\\({\n  from: '\\\\\"Salem Yogasana Festival 2026\\\\\" <' + process.env.GMAIL_USER + '>',\n  to: process.env.ADMIN_EMAIL,\n  subject: 'TEST: Registration Email Test',\n  html: '<h2>This is a test email to verify registration emails are working.</h2><p>If you see this, the email system is functional.</p>',\n}\\).then\\(\\(info\\) => {\n  console.log\\('Test email sent successfully!'\\);\n  console.log\\('MessageId:', info.messageId\\);\n  console.log\\('Response:', info.response\\);\n}\\).catch\\(\\(err\\) => {\n  console.error\\('Test email FAILED:', err.message\\);\n}\\);\n\")"
+    ]
+  }
+}

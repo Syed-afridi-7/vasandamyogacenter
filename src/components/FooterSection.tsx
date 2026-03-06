@@ -69,7 +69,12 @@ const FooterSection = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors">
+                <a
+                  href="https://share.google/zuiLq7CrN0LOmMNX1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
                   No. 71A/1, Sangari, Sankari Main Rd, Nethimedu, Salem, Tamil Nadu 636002, India
                 </a>
               </li>
