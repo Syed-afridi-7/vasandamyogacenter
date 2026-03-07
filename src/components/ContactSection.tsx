@@ -8,7 +8,7 @@ const API_ENDPOINT = "/api/contact";
 const contactInfo = [
   { icon: Phone, label: "Phone", value: "+91 70920 26756", href: "tel:+917092026756" },
   { icon: Mail, label: "Email", value: "vasanthamyogainfo@gmail.com", href: "mailto:vasanthamyogainfo@gmail.com" },
-  { icon: MapPin, label: "Office", value: "No. 71A/1, Sangari, Sankari Main Rd, Nethimedu, Salem, Tamil Nadu 636002, India", href: "https://share.google/zuiLq7CrN0LOmMNX1" },
+  { icon: MapPin, label: "Office", value: "No. 71A/1,Sankari Main Rd, Nethimedu, Salem, Tamil Nadu 636002, India", href: "https://share.google/zuiLq7CrN0LOmMNX1" },
 ];
 
 const ContactSection = () => {
@@ -181,7 +181,7 @@ const ContactSection = () => {
           className="max-w-5xl mx-auto mt-16 rounded-2xl overflow-hidden shadow-sm border border-border h-[400px]"
         >
           <iframe
-            src="https://www.google.com/maps?q=Vasantham+Yoga+Center,+No.+71A/1,+Sangari,+Sankari+Main+Rd,+Nethimedu,+Salem,+Tamil+Nadu+636002&output=embed"
+            src="https://www.google.com/maps?q=Vasantham+Yoga+Center,+No.+71A/1,+Sankari+Main+Rd,+Nethimedu,+Salem,+Tamil+Nadu+636002&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}

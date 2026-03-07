@@ -75,7 +75,7 @@ const FooterSection = () => {
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  No. 71A/1, Sangari, Sankari Main Rd, Nethimedu, Salem, Tamil Nadu 636002, India
+                  No. 71A/1,Sankari Main Rd, Nethimedu, Salem, Tamil Nadu 636002, India
                 </a>
               </li>
             </ul>
